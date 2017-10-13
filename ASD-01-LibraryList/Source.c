@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+	One way list with functions.
+*/
+
 struct ListElement
 {
 	int value;
