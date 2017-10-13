@@ -45,28 +45,28 @@ void AddToListFront(ListEl *list_el, int x)
 
 void AddToListBack(ListEl *list_el, int x)
 {
-	ListEl *front = (*list_el);
-	while ((*list_el)->next != NULL)
+	ListEl current_element = *list_el;
+	while (current_element->next != NULL)
 	{
-		*list_el = (*list_el)->next;
+		current_element = current_element->next;
 	}
 	ListEl new_element = malloc(sizeof(ListEl));
 	new_element->value = x;
 	new_element->next = NULL;
-	(*list_el)->next = new_element;
-	*list_el = front;
+	current_element->next = new_element;
 }
 
-void ViewList(ListEl list_el)
+void ViewList(ListEl *list_el)
 {
 	int i = 0;
 	if (ListEmpty(list_el) == 0)
 	{
-		while (list_el != NULL)
+		ListEl current_element = *list_el;
+		while (current_element != NULL)
 		{
 			i++;
-			printf(" %d - %d\n", i, list_el->value);
-			list_el = list_el->next;
+			printf(" %d - %d\n", i, current_element->value);
+			current_element = current_element->next;
 		}
 	}
 }
@@ -200,7 +200,7 @@ int main()
 			system("pause");
 			break;
 		case 10:
-			ViewList(list_el);
+			ViewList(&list_el);
 			system("pause");
 			break;
 		case 0:
