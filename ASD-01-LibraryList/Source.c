@@ -1,6 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
+//#define _CRTDBG_MAP_ALLOC
 #include <stdio.h>
 #include <stdlib.h>
+//#include <crtdbg.h>
 
 /*
 	One way list with functions.
@@ -123,6 +125,10 @@ void RemoveFromListFront(ListEl *list_el)
 		*list_el = current_element->next;
 		free(current_element);
 	}
+	else
+	{
+		printf("List is empty!\n");
+	}
 }
 
 void RemoveFromListBack(ListEl *list_el)
@@ -164,7 +170,6 @@ int ChooseOption()
 int main()
 {
 	List *list_el = NULL;
-	List *prev = NULL;
 
 	int x;
 
@@ -205,12 +210,14 @@ int main()
 			break;
 		case 0:
 			loop = 0;
+			_CrtDumpMemoryLeaks();
+			system("pause");
 			break;
 		default:
 			printf("\nUnknown option.");
 			break;
 		}
 	} while (loop == 1);
-
+	system("pause");
 	return 0;
 }
