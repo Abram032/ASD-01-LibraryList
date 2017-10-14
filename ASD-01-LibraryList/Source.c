@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+#define NULL ((void *)0)
 #include <stdio.h>
 #include <stdlib.h>
 #include "Lists.h"
@@ -11,6 +12,43 @@
 
 */
 
+void AddUntilNegativeFront(ListEl *list_el)
+{
+	int x;
+	int loop = 1;
+	do
+	{
+		x = SetValue();
+		if (x >= 0)
+		{
+			AddToListFront(list_el, x);
+		}
+		else
+		{
+			loop = 0;
+		}
+	} 
+	while (loop == 1);
+}
+
+void AddUntilNegativeBack(ListEl *list_el)
+{
+	int x;
+	int loop = 1;
+	do
+	{
+		x = SetValue();
+		if (x >= 0)
+		{
+			AddToListBack(list_el, x);
+		}
+		else
+		{
+			loop = 0;
+		}
+	} while (loop == 1);
+}
+
 void MainMenu()
 {
 	printf("1. Add to list front.\n");
@@ -22,6 +60,8 @@ void MainMenu()
 	printf("7. View List.\n");
 	printf("8. View List Backwards.\n");
 	printf("//------------------------------------------------------//\n");
+	printf("11. Add from front until user set negative value.\n");
+	printf("12. Add from back until user set negative value.\n");
 	printf("0. Exit.\n");
 }
 
@@ -76,6 +116,20 @@ int main()
 			system("pause");
 			break;
 		case 8:
+			ViewListBackwards(&list_el);
+			system("pause");
+			break;
+		case 11:
+			AddUntilNegativeFront(&list_el);
+			ViewList(&list_el);
+			printf("---\n");
+			ViewListBackwards(&list_el);
+			system("pause");
+			break;
+		case 12:
+			AddUntilNegativeBack(&list_el);
+			ViewList(&list_el);
+			printf("---\n");
 			ViewListBackwards(&list_el);
 			system("pause");
 			break;
