@@ -169,6 +169,11 @@ void RemoveFromListBack(ListEl *list_el)
 	}
 }
 
+void ClearMemory(ListEl *list_el)
+{
+	free(*list_el);
+}
+
 void MainMenu()
 {
 	printf("1. Add to list front.\n");
@@ -239,5 +244,7 @@ int main()
 			break;
 		}
 	} while (loop == 1);
+
+	ClearMemory(&list_el);
 	return 0;
 }
