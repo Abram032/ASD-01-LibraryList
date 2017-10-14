@@ -6,7 +6,6 @@
 	One way list with functions.
 
 	TODO:
-	- Check for memory leaks.
 	- Move functions to external library.
 
 */
