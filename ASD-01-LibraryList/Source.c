@@ -8,9 +8,6 @@
 	One way list with functions.
 
 	TODO:
-	- Fix AddToListBack so it works with first element.
-	- Check deleting from front only.
-	- Check deleting from back only.
 	- Check for memory leaks.
 	- Move functions to external library.
 
@@ -25,23 +22,23 @@ struct ListElement
 typedef struct ListElement List;
 typedef List *ListEl;
 
-int ListEmpty(ListEl list_el)
+int ListEmpty(ListEl *list_el)
 {
-	if ((list_el) == NULL)
+	if (list_el != NULL)
 	{
-		printf("List is empty!\n");
-		return 1;
+		return 0;
 	}
 	else
 	{
-		return 0;
+		printf("List is empty!\n");
+		return 1;
 	}
 }
 
 int SetValue()
 {
 	int x;
-	printf("Put value: ");
+	printf("Set value: ");
 	scanf(" %d", &x);
 	return x;
 }
@@ -56,27 +53,35 @@ void AddToListFront(ListEl *list_el, int x)
 
 void AddToListBack(ListEl *list_el, int x)
 {
-	ListEl current_element = *list_el;
-	while (current_element->next != NULL)
+	if (*list_el != NULL)
 	{
-		current_element = current_element->next;
+		ListEl current_element = *list_el;
+		while (current_element->next != NULL)
+		{
+			current_element = current_element->next;
+		}
+		ListEl new_element = malloc(sizeof(List));
+		new_element->value = x;
+		new_element->next = NULL;
+		current_element->next = new_element;
 	}
-	ListEl new_element = malloc(sizeof(List));
-	new_element->value = x;
-	new_element->next = NULL;
-	current_element->next = new_element;
+	else
+	{
+		AddToListFront(list_el, x);
+	}
+	
 }
 
 void ViewList(ListEl *list_el)
 {
 	int i = 0;
-	if (ListEmpty(list_el) == 0)
+	if (ListEmpty(*list_el) == 0)
 	{
 		ListEl current_element = *list_el;
 		while (current_element != NULL)
 		{
 			i++;
-			printf(" %d - %d\n", i, current_element->value);
+			printf(" [%d]. %d\n", i, current_element->value);
 			current_element = current_element->next;
 		}
 		free(current_element);
@@ -85,7 +90,7 @@ void ViewList(ListEl *list_el)
 
 void ViewListBackwards(ListEl *list_el)
 {
-	if (ListEmpty(list_el) == 0)
+	if (ListEmpty(*list_el) == 0)
 	{
 		ListEl current_element = *list_el;
 		int size = 0;
@@ -106,7 +111,7 @@ void ViewListBackwards(ListEl *list_el)
 		}
 		for (i = size - 1; i >= 0; i--)
 		{
-			printf(" %d. %d\n", size - i, reversed_array[i]);
+			printf(" [%d]. %d\n", size - i, reversed_array[i]);
 		}
 		free(reversed_array);
 		free(current_element);
@@ -115,7 +120,7 @@ void ViewListBackwards(ListEl *list_el)
 
 void SeekValue(ListEl *list_el, int x)
 {
-	if (ListEmpty(list_el) == 0)
+	if (ListEmpty(*list_el) == 0)
 	{
 		int i = 0;
 		ListEl current_element = *list_el;
@@ -134,7 +139,7 @@ void SeekValue(ListEl *list_el, int x)
 
 void RemoveFromListFront(ListEl *list_el)
 {
-	if (ListEmpty(list_el) == 0)
+	if (ListEmpty(*list_el) == 0)
 	{
 		ListEl current_element = *list_el;
 		*list_el = current_element->next;
@@ -144,7 +149,7 @@ void RemoveFromListFront(ListEl *list_el)
 
 void RemoveFromListBack(ListEl *list_el)
 {
-	if (ListEmpty(list_el) == 0)
+	if (ListEmpty(*list_el) == 0)
 	{
 		ListEl current_element = *list_el;
 		ListEl last_element = *list_el;
@@ -153,8 +158,16 @@ void RemoveFromListBack(ListEl *list_el)
 			last_element = current_element;
 			current_element = current_element->next;
 		}
-		last_element->next = NULL;
-		free(current_element);
+		if (last_element->next != NULL)
+		{
+			last_element->next = NULL;
+			free(current_element);
+		}
+		else
+		{
+			*list_el = NULL;
+			free(current_element);
+		}
 	}
 }
 
@@ -181,9 +194,7 @@ int ChooseOption()
 int main()
 {
 	List *list_el = NULL;
-
 	int x;
-
 	int loop = 1;
 	do
 	{
@@ -202,9 +213,11 @@ int main()
 			break;
 		case 3:
 			RemoveFromListFront(&list_el);
+			system("pause");
 			break;
 		case 4:
 			RemoveFromListBack(&list_el);
+			system("pause");
 			break;
 		case 5:
 			ViewListBackwards(&list_el);
