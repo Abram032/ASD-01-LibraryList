@@ -169,9 +169,14 @@ void RemoveFromListBack(ListEl *list_el)
 	}
 }
 
-void ClearMemory(ListEl *list_el)
+void ClearList(ListEl *list_el)
 {
-	free(*list_el);
+	while (*list_el != NULL)
+	{
+		ListEl current_element = *list_el;
+		*list_el = current_element->next;
+		free(current_element);
+	}
 }
 
 void MainMenu()
@@ -182,6 +187,7 @@ void MainMenu()
 	printf("4. Remove from back of the list.\n");
 	printf("5. View List Backwards.\n");
 	printf("6. Seek Value.\n");
+	printf("7. Clear List.\n");
 	printf("10. View List.\n");
 	printf("0. Exit.\n");
 }
@@ -231,6 +237,10 @@ int main()
 			SeekValue(&list_el, x);
 			system("pause");
 			break;
+		case 7:
+			ClearList(&list_el);
+			system("pause");
+			break;
 		case 10:
 			ViewList(&list_el);
 			system("pause");
@@ -245,6 +255,6 @@ int main()
 		}
 	} while (loop == 1);
 
-	ClearMemory(&list_el);
+	ClearList(&list_el);
 	return 0;
 }
