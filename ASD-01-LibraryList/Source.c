@@ -1,39 +1,51 @@
 #define _CRT_SECURE_NO_WARNINGS
+//#define _CRTDBG_MAP_ALLOC
 #include <stdio.h>
 #include <stdlib.h>
+//#include <crtdbg.h>
+
+/*
+	One way list with functions.
+
+	TODO:
+	- Check for memory leaks.
+	- Move functions to external library.
+
+*/
 
 struct ListElement
 {
 	int value;
-	struct element *next;
+	struct ListElement *next;
 };
 
 typedef struct ListElement List;
 typedef List *ListEl;
 
-int ListEmpty(ListEl list_el)
+int ListEmpty(ListEl *list_el)
 {
-	if ((list_el) == NULL)
+	if (list_el != NULL)
 	{
-		return 1;
+		return 0;
 	}
 	else
 	{
-		return 0;
+		printf("List is empty!\n");
+		return 1;
 	}
 }
 
 int SetValue()
 {
 	int x;
-	printf("Put value: ");
+	printf("Set value: ");
 	scanf(" %d", &x);
 	return x;
 }
 
 void AddToListFront(ListEl *list_el, int x)
 {
-	ListEl new_element = malloc(sizeof(ListEl));
+	ListEl new_element = malloc(sizeof(List));
 	new_element->value = x;
 	new_element->next = *list_el;
 	*list_el = new_element;
@@ -41,60 +53,74 @@ void AddToListFront(ListEl *list_el, int x)
 
 void AddToListBack(ListEl *list_el, int x)
 {
-	ListEl *front = (*list_el);
-	while ((*list_el)->next != NULL)
+	if (*list_el != NULL)
 	{
-		*list_el = (*list_el)->next;
+		ListEl current_element = *list_el;
+		while (current_element->next != NULL)
+		{
+			current_element = current_element->next;
+		}
+		ListEl new_element = malloc(sizeof(List));
+		new_element->value = x;
+		new_element->next = NULL;
+		current_element->next = new_element;
 	}
-	ListEl new_element = malloc(sizeof(ListEl));
-	new_element->value = x;
-	new_element->next = NULL;
-	(*list_el)->next = new_element;
-	*list_el = front;
+	else
+	{
+		AddToListFront(list_el, x);
+	}
+	
 }
 
-void ViewList(ListEl list_el)
+void ViewList(ListEl *list_el)
 {
 	int i = 0;
-	if (ListEmpty(list_el) == 0)
+	if (ListEmpty(*list_el) == 0)
 	{
-		while (list_el != NULL)
+		ListEl current_element = *list_el;
+		while (current_element != NULL)
 		{
 			i++;
-			printf(" %d - %d\n", i, list_el->value);
-			list_el = list_el->next;
+			printf(" [%d]. %d\n", i, current_element->value);
+			current_element = current_element->next;
 		}
+		free(current_element);
 	}
 }
 
 void ViewListBackwards(ListEl *list_el)
 {
-	ListEl current_element = *list_el;
-	int size = 0;
-	int i = 0;
-	int *reversed_array;
-	while (current_element->next != NULL)
+	if (ListEmpty(*list_el) == 0)
 	{
-		size++;
-		current_element = current_element->next;
+		ListEl current_element = *list_el;
+		int size = 0;
+		int i = 0;
+		int *reversed_array;
+		while (current_element != NULL)
+		{
+			size++;
+			current_element = current_element->next;
+		}
+		current_element = *list_el;
+		reversed_array = (int*)malloc(size * sizeof(*reversed_array));
+		while (current_element != NULL)
+		{
+			reversed_array[i] = current_element->value;
+			current_element = current_element->next;
+			i++;
+		}
+		for (i = size - 1; i >= 0; i--)
+		{
+			printf(" [%d]. %d\n", size - i, reversed_array[i]);
+		}
+		free(reversed_array);
+		free(current_element);
 	}
-	current_element = *list_el;
-	reversed_array = (int*)malloc(size * sizeof(*reversed_array));
-	for (i = size; i >= 0; i--)
-	{
-		reversed_array[i] = current_element->value;
-		current_element = current_element->next;
-	}
-	for (i = 0; i <= size; i++)
-	{
-		printf(" %d. %d\n", i + 1, reversed_array[i]);
-	}
-	free(reversed_array);
 }
 
 void SeekValue(ListEl *list_el, int x)
 {
-	if (ListEmpty(list_el) == 0)
+	if (ListEmpty(*list_el) == 0)
 	{
 		int i = 0;
 		ListEl current_element = *list_el;
@@ -113,7 +139,7 @@ void SeekValue(ListEl *list_el, int x)
 
 void RemoveFromListFront(ListEl *list_el)
 {
-	if (ListEmpty(list_el) == 0)
+	if (ListEmpty(*list_el) == 0)
 	{
 		ListEl current_element = *list_el;
 		*list_el = current_element->next;
@@ -123,7 +149,7 @@ void RemoveFromListFront(ListEl *list_el)
 
 void RemoveFromListBack(ListEl *list_el)
 {
-	if (ListEmpty(list_el) == 0)
+	if (ListEmpty(*list_el) == 0)
 	{
 		ListEl current_element = *list_el;
 		ListEl last_element = *list_el;
@@ -132,8 +158,16 @@ void RemoveFromListBack(ListEl *list_el)
 			last_element = current_element;
 			current_element = current_element->next;
 		}
-		last_element->next = NULL;
-		free(current_element);
+		if (last_element->next != NULL)
+		{
+			last_element->next = NULL;
+			free(current_element);
+		}
+		else
+		{
+			*list_el = NULL;
+			free(current_element);
+		}
 	}
 }
 
@@ -160,10 +194,7 @@ int ChooseOption()
 int main()
 {
 	List *list_el = NULL;
-	List *prev = NULL;
-
 	int x;
-
 	int loop = 1;
 	do
 	{
@@ -182,9 +213,11 @@ int main()
 			break;
 		case 3:
 			RemoveFromListFront(&list_el);
+			system("pause");
 			break;
 		case 4:
 			RemoveFromListBack(&list_el);
+			system("pause");
 			break;
 		case 5:
 			ViewListBackwards(&list_el);
@@ -196,17 +229,17 @@ int main()
 			system("pause");
 			break;
 		case 10:
-			ViewList(list_el);
+			ViewList(&list_el);
 			system("pause");
 			break;
 		case 0:
 			loop = 0;
+			system("pause");
 			break;
 		default:
 			printf("\nUnknown option.");
 			break;
 		}
 	} while (loop == 1);
-
 	return 0;
 }
