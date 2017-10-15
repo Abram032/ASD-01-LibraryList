@@ -8,8 +8,8 @@ Assigment Checklist:
 
 1. DONE 
 2. Recursive version left 
-3. Not Started (Optional)
-4. Not Started (Optional)
+3. DONE (Optional)
+4. DONE (Optional)
 5. Recursive version left
 6. Not Started
 7. Not Started (Optional)

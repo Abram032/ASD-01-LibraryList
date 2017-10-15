@@ -84,6 +84,97 @@ void RemoveValue(ListEl *list_el)
 	}
 }
 
+void MostFrequentValue(ListEl *list_el)
+{
+	if (ListEmpty(*list_el) == 0)
+	{
+		ListEl current_element = *list_el;
+		int array_size = 0;
+		int *value_array, *count_array;
+		int value, count;
+		int position = 0;
+		int value_exists, value_position;
+		while (current_element != NULL)
+		{
+			array_size++;
+			current_element = current_element->next;
+		}
+		current_element = *list_el;
+		value_array = (int*)malloc(array_size * sizeof(*value_array));
+		count_array = (int*)malloc(array_size * sizeof(*count_array));
+		while (current_element != NULL)
+		{
+			value = current_element->value;
+			value_exists = 0;
+			for (int i = 0; i < array_size; i++)
+			{
+				if (value == value_array[i])
+				{
+					value_exists = 1;
+					value_position = i;
+					break;
+				}
+			}
+			if (value_exists == 1)
+			{
+				count_array[value_position]++;
+			}
+			else
+			{
+				value_array[position] = value;
+				count_array[position] = 1;
+			}
+			position++;
+			current_element = current_element->next;
+		}
+		count = 0;
+		for (int i = 0; i < array_size; i++)
+		{
+			if (count_array[i] > count)
+			{
+				count = count_array[i];
+				value_position = i;
+			}
+		}
+		value = value_array[value_position];
+		count = count_array[value_position];
+		printf("The most occuring value is %d. It appeared %d times in list.\n", value, count);
+	}
+}
+
+void RemoveEven(ListEl *list_el)
+{
+	if (ListEmpty(*list_el) == 0)
+	{
+		ListEl current_element = *list_el;
+		ListEl previous_element = *list_el;
+		while (current_element != NULL)
+		{
+			if (current_element->value % 2 == 0)
+			{
+				if (current_element == previous_element)
+				{
+					previous_element = current_element->next;
+					*list_el = previous_element;
+					free(current_element);
+					current_element = previous_element;
+				}
+				else
+				{
+					previous_element->next = current_element->next;
+					free(current_element);
+					current_element = previous_element;
+				}
+			}
+			else
+			{
+				previous_element = current_element;
+				current_element = current_element->next;
+			}
+		}
+	}
+}
+
 /*
 void ASDHwMyWay(ListEl *list_el)
 {
@@ -119,6 +210,8 @@ void MainMenu()
 	printf("11. Add from front until user set negative value.\n");
 	printf("12. Add from back until user set negative value.\n");
 	printf("13. Remove Value from the list.\n");
+	printf("14. Find most occuring value in the list.\n");
+	printf("15. Remove even values from the list.\n");
 	printf("------------------------------------------------------\n");
 	printf("20. Flip List.\n");
 	printf("------------------------------------------------------\n");
@@ -138,7 +231,7 @@ int main()
 {
 	List *list_el = NULL;
 
-	List *l, *p, *n;
+	//List *l, *p, *n;  //Used in menu option 99
 
 	int x;
 	int loop = 1;
@@ -198,6 +291,14 @@ int main()
 			break;
 		case 13:
 			RemoveValue(&list_el);
+			system("pause");
+			break;
+		case 14:
+			MostFrequentValue(&list_el);
+			system("pause");
+			break;
+		case 15:
+			RemoveEven(&list_el);
 			system("pause");
 			break;
 		case 20:
