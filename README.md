@@ -2,11 +2,11 @@
 
 Application does operations on lists such as, adding, removing values to and from list, searching for certain value or removing it, reversing the list and more.
 
-Assigments: http://www.is.umk.pl/~norbert/asd/lab-zadania.pdf
+[Assigments](http://www.is.umk.pl/~norbert/asd/lab-zadania.pdf)
 
 Assigment Checklist:
 
-1. DONE
+1. DONE 
 2. Recursive version left 
 3. Not Started (Optional)
 4. Not Started (Optional)
