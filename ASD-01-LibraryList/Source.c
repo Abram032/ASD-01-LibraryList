@@ -9,6 +9,7 @@
 
 	TODO:
 	- Remove Value recursive.
+	- Flip List recursive.
 
 */
 
@@ -27,8 +28,7 @@ void AddUntilNegativeFront(ListEl *list_el)
 		{
 			loop = 0;
 		}
-	} 
-	while (loop == 1);
+	} while (loop == 1);
 }
 
 void AddUntilNegativeBack(ListEl *list_el)
@@ -86,6 +86,9 @@ void RemoveValue(ListEl *list_el)
 
 void MainMenu()
 {
+	printf("------------------------------------------------------\n");
+	printf("----------------------/ASD Lists/---------------------\n");
+	printf("------------------------------------------------------\n");
 	printf("1. Add to list front.\n");
 	printf("2. Add to list back.\n");
 	printf("3. Remove from front of the list.\n");
@@ -94,11 +97,15 @@ void MainMenu()
 	printf("6. Seek Value.\n");
 	printf("7. View List.\n");
 	printf("8. View List Backwards.\n");
-	printf("//------------------------------------------------------//\n");
+	printf("------------------------------------------------------\n");
 	printf("11. Add from front until user set negative value.\n");
 	printf("12. Add from back until user set negative value.\n");
 	printf("13. Remove Value from the list.\n");
+	printf("------------------------------------------------------\n");
+	printf("20. Flip List.\n");
+	printf("------------------------------------------------------\n");
 	printf("0. Exit.\n");
+	printf("------------------------------------------------------\n");
 }
 
 int ChooseOption()
@@ -171,6 +178,10 @@ int main()
 			break;
 		case 13:
 			RemoveValue(&list_el);
+			system("pause");
+			break;
+		case 20:
+			FlipList(&list_el);
 			system("pause");
 			break;
 		case 0:

@@ -170,3 +170,39 @@ void ClearList(ListEl *list_el)
 		free(current_element);
 	}
 }
+
+void FlipList(ListEl *list_el)
+{
+	if (ListEmpty(*list_el) == 0)
+	{
+		ListEl current_element = *list_el;
+		ListEl previous_element = *list_el;
+		ListEl future_element = *list_el;
+		if (current_element != NULL)
+		{
+			current_element = current_element->next;
+		}
+		if (future_element != NULL)
+		{
+			if (current_element != NULL)
+			{
+				future_element = current_element->next;
+			}
+		}
+		previous_element->next = NULL;
+		while (current_element != NULL)
+		{
+			current_element->next = previous_element;
+			previous_element = current_element;
+			if (current_element != NULL)
+			{
+				current_element = future_element;
+			}
+			if (future_element != NULL)
+			{
+				future_element = future_element->next;
+			}
+		}
+		*list_el = previous_element;
+	}
+}
