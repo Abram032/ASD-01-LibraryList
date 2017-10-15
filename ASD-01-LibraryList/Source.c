@@ -1,186 +1,111 @@
 #define _CRT_SECURE_NO_WARNINGS
-//#define _CRTDBG_MAP_ALLOC
+#define NULL ((void *)0)
 #include <stdio.h>
 #include <stdlib.h>
-//#include <crtdbg.h>
+#include "Lists.h"
 
 /*
 	One way list with functions.
 
 	TODO:
-	- Check for memory leaks.
-	- Move functions to external library.
+	- Remove Value recursive.
+	- Flip List recursive.
 
 */
 
-struct ListElement
-{
-	int value;
-	struct ListElement *next;
-};
-
-typedef struct ListElement List;
-typedef List *ListEl;
-
-int ListEmpty(ListEl *list_el)
-{
-	if (list_el != NULL)
-	{
-		return 0;
-	}
-	else
-	{
-		printf("List is empty!\n");
-		return 1;
-	}
-}
-
-int SetValue()
+void AddUntilNegativeFront(ListEl *list_el)
 {
 	int x;
-	printf("Set value: ");
-	scanf(" %d", &x);
-	return x;
-}
-
-void AddToListFront(ListEl *list_el, int x)
-{
-	ListEl new_element = malloc(sizeof(List));
-	new_element->value = x;
-	new_element->next = *list_el;
-	*list_el = new_element;
-}
-
-void AddToListBack(ListEl *list_el, int x)
-{
-	if (*list_el != NULL)
+	int loop = 1;
+	do
 	{
-		ListEl current_element = *list_el;
-		while (current_element->next != NULL)
+		x = SetValue();
+		if (x >= 0)
 		{
-			current_element = current_element->next;
+			AddToListFront(list_el, x);
 		}
-		ListEl new_element = malloc(sizeof(List));
-		new_element->value = x;
-		new_element->next = NULL;
-		current_element->next = new_element;
-	}
-	else
-	{
-		AddToListFront(list_el, x);
-	}
-	
+		else
+		{
+			loop = 0;
+		}
+	} while (loop == 1);
 }
 
-void ViewList(ListEl *list_el)
+void AddUntilNegativeBack(ListEl *list_el)
 {
-	int i = 0;
+	int x;
+	int loop = 1;
+	do
+	{
+		x = SetValue();
+		if (x >= 0)
+		{
+			AddToListBack(list_el, x);
+		}
+		else
+		{
+			loop = 0;
+		}
+	} while (loop == 1);
+}
+
+void RemoveValue(ListEl *list_el)
+{
+	int x;
+	x = SetValue();
 	if (ListEmpty(*list_el) == 0)
 	{
 		ListEl current_element = *list_el;
-		while (current_element != NULL)
-		{
-			i++;
-			printf(" [%d]. %d\n", i, current_element->value);
-			current_element = current_element->next;
-		}
-		free(current_element);
-	}
-}
-
-void ViewListBackwards(ListEl *list_el)
-{
-	if (ListEmpty(*list_el) == 0)
-	{
-		ListEl current_element = *list_el;
-		int size = 0;
-		int i = 0;
-		int *reversed_array;
-		while (current_element != NULL)
-		{
-			size++;
-			current_element = current_element->next;
-		}
-		current_element = *list_el;
-		reversed_array = (int*)malloc(size * sizeof(*reversed_array));
-		while (current_element != NULL)
-		{
-			reversed_array[i] = current_element->value;
-			current_element = current_element->next;
-			i++;
-		}
-		for (i = size - 1; i >= 0; i--)
-		{
-			printf(" [%d]. %d\n", size - i, reversed_array[i]);
-		}
-		free(reversed_array);
-		free(current_element);
-	}
-}
-
-void SeekValue(ListEl *list_el, int x)
-{
-	if (ListEmpty(*list_el) == 0)
-	{
-		int i = 0;
-		ListEl current_element = *list_el;
+		ListEl previous_element = *list_el;
 		while (current_element != NULL)
 		{
 			if (current_element->value == x)
 			{
-				i++;
-				printf("Value %d is at %d position in the list.\n", x, i);
+				if (current_element == previous_element)
+				{
+					previous_element = current_element->next;
+					*list_el = previous_element;
+					free(current_element);
+					current_element = previous_element;
+				}
+				else
+				{
+					previous_element->next = current_element->next;
+					free(current_element);
+					current_element = previous_element;
+				}
 			}
-			i++;
-			current_element = current_element->next;
-		}
-	}
-}
-
-void RemoveFromListFront(ListEl *list_el)
-{
-	if (ListEmpty(*list_el) == 0)
-	{
-		ListEl current_element = *list_el;
-		*list_el = current_element->next;
-		free(current_element);
-	}
-}
-
-void RemoveFromListBack(ListEl *list_el)
-{
-	if (ListEmpty(*list_el) == 0)
-	{
-		ListEl current_element = *list_el;
-		ListEl last_element = *list_el;
-		while (current_element->next != NULL)
-		{
-			last_element = current_element;
-			current_element = current_element->next;
-		}
-		if (last_element->next != NULL)
-		{
-			last_element->next = NULL;
-			free(current_element);
-		}
-		else
-		{
-			*list_el = NULL;
-			free(current_element);
+			else
+			{
+				previous_element = current_element;
+				current_element = current_element->next;
+			}
 		}
 	}
 }
 
 void MainMenu()
 {
+	printf("------------------------------------------------------\n");
+	printf("----------------------/ASD Lists/---------------------\n");
+	printf("------------------------------------------------------\n");
 	printf("1. Add to list front.\n");
 	printf("2. Add to list back.\n");
 	printf("3. Remove from front of the list.\n");
 	printf("4. Remove from back of the list.\n");
-	printf("5. View List Backwards.\n");
+	printf("5. Clear List.\n");
 	printf("6. Seek Value.\n");
-	printf("10. View List.\n");
+	printf("7. View List.\n");
+	printf("8. View List Backwards.\n");
+	printf("------------------------------------------------------\n");
+	printf("11. Add from front until user set negative value.\n");
+	printf("12. Add from back until user set negative value.\n");
+	printf("13. Remove Value from the list.\n");
+	printf("------------------------------------------------------\n");
+	printf("20. Flip List.\n");
+	printf("------------------------------------------------------\n");
 	printf("0. Exit.\n");
+	printf("------------------------------------------------------\n");
 }
 
 int ChooseOption()
@@ -194,6 +119,7 @@ int ChooseOption()
 int main()
 {
 	List *list_el = NULL;
+
 	int x;
 	int loop = 1;
 	do
@@ -220,7 +146,7 @@ int main()
 			system("pause");
 			break;
 		case 5:
-			ViewListBackwards(&list_el);
+			ClearList(&list_el);
 			system("pause");
 			break;
 		case 6:
@@ -228,8 +154,34 @@ int main()
 			SeekValue(&list_el, x);
 			system("pause");
 			break;
-		case 10:
+		case 7:
 			ViewList(&list_el);
+			system("pause");
+			break;
+		case 8:
+			ViewListBackwards(&list_el);
+			system("pause");
+			break;
+		case 11:
+			AddUntilNegativeFront(&list_el);
+			ViewList(&list_el);
+			printf("---\n");
+			ViewListBackwards(&list_el);
+			system("pause");
+			break;
+		case 12:
+			AddUntilNegativeBack(&list_el);
+			ViewList(&list_el);
+			printf("---\n");
+			ViewListBackwards(&list_el);
+			system("pause");
+			break;
+		case 13:
+			RemoveValue(&list_el);
+			system("pause");
+			break;
+		case 20:
+			FlipList(&list_el);
 			system("pause");
 			break;
 		case 0:
@@ -241,5 +193,7 @@ int main()
 			break;
 		}
 	} while (loop == 1);
+
+	ClearList(&list_el);
 	return 0;
 }
