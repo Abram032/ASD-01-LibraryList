@@ -84,6 +84,24 @@ void RemoveValue(ListEl *list_el)
 	}
 }
 
+/*
+void ASDHwMyWay(ListEl *list_el)
+{
+	ListEl previous_element = *list_el;
+	ListEl current_element = *list_el;
+	ListEl future_element = *list_el;
+	while (current_element->next != NULL)
+	{
+		previous_element = malloc(sizeof(List));
+		future_element = future_element->next;
+		previous_element->value = future_element->value - 1;
+		previous_element->next = future_element;
+		current_element->next = previous_element;
+		current_element = previous_element->next;
+	}
+}
+*/
+
 void MainMenu()
 {
 	printf("------------------------------------------------------\n");
@@ -119,6 +137,8 @@ int ChooseOption()
 int main()
 {
 	List *list_el = NULL;
+
+	List *l, *p, *n;
 
 	int x;
 	int loop = 1;
@@ -184,6 +204,29 @@ int main()
 			FlipList(&list_el);
 			system("pause");
 			break;
+			/*
+		case 98:
+			ASDHwMyWay(&list_el);
+			ViewList(&list_el);
+			system("pause");
+			break;
+		case 99:
+			l = list_el;
+			p = list_el;
+			n = l;
+			while (l->next != NULL)
+			{
+				p = malloc(sizeof(List));
+				n = n->next;
+				p->value = n->value - 1;
+				p->next = n;
+				l->next = p;
+				l = p->next;
+			}
+			ViewList(&list_el);
+			system("pause");
+			break;
+			*/
 		case 0:
 			loop = 0;
 			system("pause");
