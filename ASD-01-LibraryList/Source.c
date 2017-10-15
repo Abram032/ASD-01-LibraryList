@@ -8,7 +8,7 @@
 	One way list with functions.
 
 	TODO:
-	-
+	- Remove Value recursive.
 
 */
 
@@ -49,6 +49,41 @@ void AddUntilNegativeBack(ListEl *list_el)
 	} while (loop == 1);
 }
 
+void RemoveValue(ListEl *list_el)
+{
+	int x;
+	x = SetValue();
+	if (ListEmpty(*list_el) == 0)
+	{
+		ListEl current_element = *list_el;
+		ListEl previous_element = *list_el;
+		while (current_element != NULL)
+		{
+			if (current_element->value == x)
+			{
+				if (current_element == previous_element)
+				{
+					previous_element = current_element->next;
+					*list_el = previous_element;
+					free(current_element);
+					current_element = previous_element;
+				}
+				else
+				{
+					previous_element->next = current_element->next;
+					free(current_element);
+					current_element = previous_element;
+				}
+			}
+			else
+			{
+				previous_element = current_element;
+				current_element = current_element->next;
+			}
+		}
+	}
+}
+
 void MainMenu()
 {
 	printf("1. Add to list front.\n");
@@ -62,6 +97,7 @@ void MainMenu()
 	printf("//------------------------------------------------------//\n");
 	printf("11. Add from front until user set negative value.\n");
 	printf("12. Add from back until user set negative value.\n");
+	printf("13. Remove Value from the list.\n");
 	printf("0. Exit.\n");
 }
 
@@ -131,6 +167,10 @@ int main()
 			ViewList(&list_el);
 			printf("---\n");
 			ViewListBackwards(&list_el);
+			system("pause");
+			break;
+		case 13:
+			RemoveValue(&list_el);
 			system("pause");
 			break;
 		case 0:
