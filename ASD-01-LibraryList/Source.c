@@ -49,10 +49,8 @@ void AddUntilNegativeBack(ListEl *list_el)
 	} while (loop == 1);
 }
 
-void RemoveValue(ListEl *list_el)
+void RemoveValue(ListEl *list_el, int x)
 {
-	int x;
-	x = SetValue();
 	if (ListEmpty(*list_el) == 0)
 	{
 		ListEl current_element = *list_el;
@@ -80,6 +78,35 @@ void RemoveValue(ListEl *list_el)
 				previous_element = current_element;
 				current_element = current_element->next;
 			}
+		}
+	}
+}
+
+void RemoveValueRecursive(ListEl *list_el, int x)
+{
+	if (ListEmpty(*list_el) == 0)
+	{
+		ListEl previous_element = *list_el;
+		ListEl current_element = previous_element->next;
+		if (current_element->value == x)
+		{
+			if (current_element == previous_element)
+			{
+				previous_element = current_element->next;
+				*list_el = previous_element;
+				free(current_element);
+				current_element = previous_element;
+			}
+			else
+			{
+				previous_element->next = current_element->next;
+				free(current_element);
+				current_element = previous_element;
+			}
+		}
+		else
+		{
+			RemoveValueRecursive(&(*list_el)->next, x);
 		}
 	}
 }
@@ -210,8 +237,9 @@ void MainMenu()
 	printf("11. Add from front until user set negative value.\n");
 	printf("12. Add from back until user set negative value.\n");
 	printf("13. Remove Value from the list.\n");
-	printf("14. Find most occuring value in the list.\n");
-	printf("15. Remove even values from the list.\n");
+	printf("14. Remove Value recursive from the list.\n");
+	printf("15. Find most occuring value in the list.\n");
+	printf("16. Remove even values from the list.\n");
 	printf("------------------------------------------------------\n");
 	printf("20. Flip List.\n");
 	printf("------------------------------------------------------\n");
@@ -290,14 +318,20 @@ int main()
 			system("pause");
 			break;
 		case 13:
-			RemoveValue(&list_el);
+			x = SetValue();
+			RemoveValue(&list_el, x);
 			system("pause");
 			break;
 		case 14:
-			MostFrequentValue(&list_el);
+			x = SetValue();
+			RemoveValueRecursive(&list_el, x);
 			system("pause");
 			break;
 		case 15:
+			MostFrequentValue(&list_el);
+			system("pause");
+			break;
+		case 16:
 			RemoveEven(&list_el);
 			system("pause");
 			break;
