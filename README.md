@@ -7,11 +7,11 @@ Application does operations on lists such as, adding, removing values to and fro
 Assigment Checklist:
 
 1. DONE 
-2. Recursive version left 
+2. DONE
 3. DONE (Optional)
 4. DONE (Optional)
 5. Recursive version left
-6. Not Started
+6. DONE [Needs checking]
 7. Not Started (Optional)
 8. Not Started (Optional)
 9. Not Started

@@ -206,3 +206,10 @@ void FlipList(ListEl *list_el)
 		*list_el = previous_element;
 	}
 }
+
+void FlipListRecursive(ListEl *list_el)
+{
+	/*
+		- TODO
+	*/
+}

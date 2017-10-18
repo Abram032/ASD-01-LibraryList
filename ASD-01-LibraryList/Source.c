@@ -8,9 +8,9 @@
 	One way list with functions.
 
 	TODO:
-	- Remove Value recursive.
 	- Flip List recursive.
-
+	- Check sorting algorithms.
+	- ADD COMMENTS !!!
 */
 
 void AddUntilNegativeFront(ListEl *list_el)
@@ -49,10 +49,8 @@ void AddUntilNegativeBack(ListEl *list_el)
 	} while (loop == 1);
 }
 
-void RemoveValue(ListEl *list_el)
+void RemoveValue(ListEl *list_el, int x)
 {
-	int x;
-	x = SetValue();
 	if (ListEmpty(*list_el) == 0)
 	{
 		ListEl current_element = *list_el;
@@ -80,6 +78,30 @@ void RemoveValue(ListEl *list_el)
 				previous_element = current_element;
 				current_element = current_element->next;
 			}
+		}
+	}
+}
+
+void RemoveValueRecursive(ListEl *list_el, int x)
+{
+	if (ListEmpty(*list_el) == 0)
+	{
+		ListEl previous_element = *list_el;
+		ListEl current_element = *list_el;
+		if (current_element->value == x)
+		{
+			if (current_element == previous_element)
+			{
+				previous_element = current_element->next;
+				*list_el = previous_element;
+				free(current_element);
+				current_element = previous_element;
+				RemoveValueRecursive(&(*list_el), x);
+			}
+		}
+		else
+		{
+			RemoveValueRecursive(&(*list_el)->next, x);
 		}
 	}
 }
@@ -175,23 +197,63 @@ void RemoveEven(ListEl *list_el)
 	}
 }
 
-/*
-void ASDHwMyWay(ListEl *list_el)
+void SortListNG(ListEl *list_el)
 {
-	ListEl previous_element = *list_el;
-	ListEl current_element = *list_el;
-	ListEl future_element = *list_el;
-	while (current_element->next != NULL)
+	if (ListEmpty(list_el) == 0)
 	{
-		previous_element = malloc(sizeof(List));
-		future_element = future_element->next;
-		previous_element->value = future_element->value - 1;
-		previous_element->next = future_element;
-		current_element->next = previous_element;
-		current_element = previous_element->next;
+		ListEl current_element = *list_el;
+		ListEl minimal_element = *list_el;
+		ListEl minimum = *list_el;
+		int temp_value;
+		while (current_element != NULL)
+		{
+			minimum = current_element;
+			while (minimal_element != NULL)
+			{
+				if (minimal_element->value <= minimum->value)
+				{
+					minimum = minimal_element;
+				}
+				minimal_element = minimal_element->next;
+			}
+			temp_value = current_element->value;
+			current_element->value = minimum->value;
+			minimum->value = temp_value;
+			current_element = current_element->next;
+			minimal_element = current_element;
+		}
 	}
 }
-*/
+
+void SortListWG(ListEl *list_el)
+{
+	if (ListEmpty(list_el) == 0)
+	{
+		ListEl current_element = *list_el;
+		ListEl minimal_element = *list_el;
+		ListEl minimum = *list_el;
+		int temp_value;
+		while (current_element != NULL)
+		{
+			minimum = current_element;
+			AddToListBack(list_el, NULL);
+			while (minimal_element->value != NULL)
+			{
+				if (minimal_element->value <= minimum->value)
+				{
+					minimum = minimal_element;
+				}
+				minimal_element = minimal_element->next;
+			}
+			RemoveFromListBack(list_el);
+			temp_value = current_element->value;
+			current_element->value = minimum->value;
+			minimum->value = temp_value;
+			current_element = current_element->next;
+			minimal_element = current_element;
+		}
+	}
+}
 
 void MainMenu()
 {
@@ -210,10 +272,13 @@ void MainMenu()
 	printf("11. Add from front until user set negative value.\n");
 	printf("12. Add from back until user set negative value.\n");
 	printf("13. Remove Value from the list.\n");
-	printf("14. Find most occuring value in the list.\n");
-	printf("15. Remove even values from the list.\n");
+	printf("14. Remove Value recursive from the list.\n");
+	printf("15. Find most occuring value in the list.\n");
+	printf("16. Remove even values from the list.\n");
 	printf("------------------------------------------------------\n");
 	printf("20. Flip List.\n");
+	printf("22. Sort list (without guardian).\n");
+	printf("23. Sort list (with guardian).\n");
 	printf("------------------------------------------------------\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");
@@ -230,8 +295,6 @@ int ChooseOption()
 int main()
 {
 	List *list_el = NULL;
-
-	//List *l, *p, *n;  //Used in menu option 99
 
 	int x;
 	int loop = 1;
@@ -290,14 +353,20 @@ int main()
 			system("pause");
 			break;
 		case 13:
-			RemoveValue(&list_el);
+			x = SetValue();
+			RemoveValue(&list_el, x);
 			system("pause");
 			break;
 		case 14:
-			MostFrequentValue(&list_el);
+			x = SetValue();
+			RemoveValueRecursive(&list_el, x);
 			system("pause");
 			break;
 		case 15:
+			MostFrequentValue(&list_el);
+			system("pause");
+			break;
+		case 16:
 			RemoveEven(&list_el);
 			system("pause");
 			break;
@@ -305,29 +374,14 @@ int main()
 			FlipList(&list_el);
 			system("pause");
 			break;
-			/*
-		case 98:
-			ASDHwMyWay(&list_el);
-			ViewList(&list_el);
+		case 22:
+			SortListNG(&list_el);
 			system("pause");
 			break;
-		case 99:
-			l = list_el;
-			p = list_el;
-			n = l;
-			while (l->next != NULL)
-			{
-				p = malloc(sizeof(List));
-				n = n->next;
-				p->value = n->value - 1;
-				p->next = n;
-				l->next = p;
-				l = p->next;
-			}
-			ViewList(&list_el);
+		case 23:
+			SortListWG(&list_el);
 			system("pause");
 			break;
-			*/
 		case 0:
 			loop = 0;
 			system("pause");
