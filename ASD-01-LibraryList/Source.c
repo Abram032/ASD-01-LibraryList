@@ -9,7 +9,7 @@
 
 	TODO:
 	- Flip List recursive.
-	- Sorting with guardian.
+	- Check sorting algorithms.
 	- ADD COMMENTS !!!
 */
 
@@ -86,7 +86,7 @@ void RemoveValueRecursive(ListEl *list_el, int x)
 {
 	if (ListEmpty(*list_el) == 0)
 	{
-		ListEl previous_element = *list_el; 
+		ListEl previous_element = *list_el;
 		ListEl current_element = *list_el;
 		if (current_element->value == x)
 		{
@@ -199,36 +199,60 @@ void RemoveEven(ListEl *list_el)
 
 void SortListNG(ListEl *list_el)
 {
-	ListEl current_element = *list_el;
-	ListEl minimal_element = *list_el;
-	ListEl minimum = *list_el;
-	int temp_value;
-	while (current_element != NULL)
+	if (ListEmpty(list_el) == 0)
 	{
-		minimum = current_element;
-		while (minimal_element != NULL)
+		ListEl current_element = *list_el;
+		ListEl minimal_element = *list_el;
+		ListEl minimum = *list_el;
+		int temp_value;
+		while (current_element != NULL)
 		{
-			if (minimal_element->value <= minimum->value)
+			minimum = current_element;
+			while (minimal_element != NULL)
 			{
-				minimum = minimal_element;
+				if (minimal_element->value <= minimum->value)
+				{
+					minimum = minimal_element;
+				}
 				minimal_element = minimal_element->next;
 			}
-			else
-			{
-				minimal_element = minimal_element->next;
-			}		
+			temp_value = current_element->value;
+			current_element->value = minimum->value;
+			minimum->value = temp_value;
+			current_element = current_element->next;
+			minimal_element = current_element;
 		}
-		temp_value = current_element->value;
-		current_element->value = minimum->value;
-		minimum->value = temp_value;
-		current_element = current_element->next;
-		minimal_element = current_element;
 	}
 }
 
 void SortListWG(ListEl *list_el)
 {
-	return;
+	if (ListEmpty(list_el) == 0)
+	{
+		ListEl current_element = *list_el;
+		ListEl minimal_element = *list_el;
+		ListEl minimum = *list_el;
+		int temp_value;
+		while (current_element != NULL)
+		{
+			minimum = current_element;
+			AddToListBack(list_el, NULL);
+			while (minimal_element->value != NULL)
+			{
+				if (minimal_element->value <= minimum->value)
+				{
+					minimum = minimal_element;
+				}
+				minimal_element = minimal_element->next;
+			}
+			RemoveFromListBack(list_el);
+			temp_value = current_element->value;
+			current_element->value = minimum->value;
+			minimum->value = temp_value;
+			current_element = current_element->next;
+			minimal_element = current_element;
+		}
+	}
 }
 
 void MainMenu()
@@ -253,8 +277,8 @@ void MainMenu()
 	printf("16. Remove even values from the list.\n");
 	printf("------------------------------------------------------\n");
 	printf("20. Flip List.\n");
-	printf("22. Sort list (without guard).\n");
-	printf("23. Sort list (with guard) WIP.\n");
+	printf("22. Sort list (without guardian).\n");
+	printf("23. Sort list (with guardian).\n");
 	printf("------------------------------------------------------\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");
@@ -355,7 +379,7 @@ int main()
 			system("pause");
 			break;
 		case 23:
-			//SortListWG(&list_el);
+			SortListWG(&list_el);
 			system("pause");
 			break;
 		case 0:
