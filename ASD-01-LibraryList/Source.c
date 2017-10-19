@@ -197,7 +197,7 @@ void RemoveEven(ListEl *list_el)
 	}
 }
 
-void SortListNG(ListEl *list_el)
+void SortList(ListEl *list_el)
 {
 	if (ListEmpty(list_el) == 0)
 	{
@@ -225,6 +225,7 @@ void SortListNG(ListEl *list_el)
 	}
 }
 
+/*
 void SortListWG(ListEl *list_el)
 {
 	if (ListEmpty(list_el) == 0)
@@ -254,6 +255,7 @@ void SortListWG(ListEl *list_el)
 		}
 	}
 }
+*/
 
 void AddToListSortedNG(ListEl *list_el, int x)
 {
@@ -325,6 +327,74 @@ void AddToListSortedWG(ListEl *list_el, int x)
 	}
 }
 
+void CompareLists(ListEl *list_a, ListEl *list_b, ListEl *list_aw, ListEl *list_bw)
+{
+	if (ListEmpty(list_a) && ListEmpty(list_b) == 1)
+	{
+		return;
+	}
+	else
+	{
+		if (ListEmpty(list_a) == 1)
+		{
+			ViewList(list_b);
+			return;
+		}
+		if (ListEmpty(list_b) == 1)
+		{
+			ViewList(list_a);
+			return;
+		}
+		//Sprawdzania listy a -> b
+		ListEl current_element_a = *list_a;
+		ListEl current_element_b = *list_b;
+		int value;
+		while (current_element_a != NULL)
+		{
+			value = current_element_a->value;
+			AddToListBack(list_aw, value);
+			while (current_element_b->next != NULL)
+			{
+				if (current_element_b->value == value)
+				{
+					RemoveFromListBack(list_aw);
+					break;
+				}
+				current_element_b = current_element_b->next;
+			}
+			current_element_a = current_element_a->next;
+			current_element_b = *list_b;	
+		}
+		//Sprawdzanie lista b -> a
+		current_element_a = *list_a;
+		current_element_b = *list_b;
+		while (current_element_b != NULL)
+		{
+			value = current_element_b->value;
+			AddToListBack(list_bw, value);
+			while (current_element_a->next != NULL)
+			{
+				if (current_element_a->value == value)
+				{
+					RemoveFromListBack(list_bw);
+					break;
+				}
+				current_element_a = current_element_a->next;
+			}
+			current_element_b = current_element_b->next;
+			current_element_a = *list_a;		
+		}
+		printf("List A\n");
+		ViewList(list_a);
+		printf("List AW\n");
+		ViewList(list_aw);
+		printf("List B\n");
+		ViewList(list_b);
+		printf("List BW\n");
+		ViewList(list_bw);
+	}
+}
+
 void MainMenu()
 {
 	printf("------------------------------------------------------\n");
@@ -347,11 +417,16 @@ void MainMenu()
 	printf("16. Remove even values from the list.\n");
 	printf("------------------------------------------------------\n");
 	printf("20. Flip List.\n");
-	printf("21. Flip list recursive.\n");
-	printf("22. Sort list (without guardian).\n");
-	printf("23. Sort list (with guardian).\n");
-	printf("24. Add to list sorted (without guardian).\n");
-	printf("25. Add to list sorted (with guardian).\n");
+	printf("21. Flip list recursive [NOT FINISHED].\n");
+	printf("22. Sort list.\n");
+	printf("23. Add to list sorted (without guardian).\n");
+	printf("24. Add to list sorted (with guardian).\n");
+	printf("------------------------------------------------------\n");
+	printf("31. Add to list A sorted (with guardian).\n");
+	printf("32. Add to list B sorted (with guardian).\n");
+	printf("33. View List A.\n");
+	printf("34. View List B.\n");
+	printf("35. Compare lists A and B.\n");
 	printf("------------------------------------------------------\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");
@@ -368,6 +443,10 @@ int ChooseOption()
 int main()
 {
 	List *list_el = NULL;
+	List *list_a = NULL;
+	List *list_b = NULL;
+	List *list_aw = NULL;
+	List *list_bw = NULL;
 
 	int x;
 	int loop = 1;
@@ -452,21 +531,45 @@ int main()
 			system("pause");
 			break;
 		case 22:
-			SortListNG(&list_el);
+			SortList(&list_el);
 			system("pause");
 			break;
+			/*
 		case 23:
 			SortListWG(&list_el);
 			system("pause");
 			break;
-		case 24:
+			*/
+		case 23:
 			x = SetValue();
 			AddToListSortedNG(&list_el, x);
 			system("pause");
 			break;
-		case 25:
+		case 24:
 			x = SetValue();
 			AddToListSortedWG(&list_el, x);
+			system("pause");
+			break;
+		case 31:
+			x = SetValue();
+			AddToListSortedWG(&list_a, x);
+			system("pause");
+			break;
+		case 32:
+			x = SetValue();
+			AddToListSortedWG(&list_b, x);
+			system("pause");
+			break;
+		case 33:
+			ViewList(&list_a);
+			system("pause");
+			break;
+		case 34:
+			ViewList(&list_b);
+			system("pause");
+			break;
+		case 35:	
+			CompareLists(&list_a, &list_b, &list_aw, &list_bw);
 			system("pause");
 			break;
 		case 0:
