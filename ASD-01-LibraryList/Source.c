@@ -255,6 +255,43 @@ void SortListWG(ListEl *list_el)
 	}
 }
 
+void AddToListSortedNG(ListEl *list_el, int x)
+{
+	if (ListEmpty(*list_el) == 0)
+	{
+		ListEl current_element = *list_el;
+		ListEl future_element = current_element->next;
+		ListEl new_element = malloc(sizeof(List));
+		if (current_element->value >= x)
+		{
+			AddToListFront(list_el, x);
+		}
+		else
+		{
+			while (current_element->next != NULL)
+			{
+				if (future_element->value >= x)
+				{
+					break;
+				}
+				else
+				{
+					current_element = future_element;
+					future_element = future_element->next;
+				}
+			}
+			future_element = current_element->next;
+			new_element->value = x;
+			current_element->next = new_element;
+			new_element->next = future_element;
+		}
+	}
+	else
+	{
+		AddToListFront(list_el, x);
+	}
+}
+
 void MainMenu()
 {
 	printf("------------------------------------------------------\n");
@@ -277,8 +314,10 @@ void MainMenu()
 	printf("16. Remove even values from the list.\n");
 	printf("------------------------------------------------------\n");
 	printf("20. Flip List.\n");
+	printf("21. Flip list recursive.\n");
 	printf("22. Sort list (without guardian).\n");
 	printf("23. Sort list (with guardian).\n");
+	printf("24. Add to list sorted (without guardian).\n");
 	printf("------------------------------------------------------\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");
@@ -374,12 +413,21 @@ int main()
 			FlipList(&list_el);
 			system("pause");
 			break;
+		case 21:
+			FlipListRecursive(&list_el);
+			system("pause");
+			break;
 		case 22:
 			SortListNG(&list_el);
 			system("pause");
 			break;
 		case 23:
 			SortListWG(&list_el);
+			system("pause");
+			break;
+		case 24:
+			x = SetValue();
+			AddToListSortedNG(&list_el, x);
 			system("pause");
 			break;
 		case 0:
