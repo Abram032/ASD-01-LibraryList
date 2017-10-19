@@ -292,6 +292,39 @@ void AddToListSortedNG(ListEl *list_el, int x)
 	}
 }
 
+void AddToListSortedWG(ListEl *list_el, int x)
+{
+	if (ListEmpty(*list_el) == 0)
+	{
+		AddToListBack(list_el, x);
+		ListEl current_element = *list_el;
+		ListEl future_element = current_element->next;
+		ListEl new_element = malloc(sizeof(List));	
+		if (current_element->value >= x)
+		{
+			AddToListFront(list_el, x);
+			RemoveFromListBack(list_el);
+		}
+		else
+		{
+			while (future_element->value < x)
+			{
+					current_element = future_element;
+					future_element = future_element->next;
+			}
+			future_element = current_element->next;
+			new_element->value = x;
+			current_element->next = new_element;
+			new_element->next = future_element;
+			RemoveFromListBack(list_el);
+		}
+	}
+	else
+	{
+		AddToListFront(list_el, x);
+	}
+}
+
 void MainMenu()
 {
 	printf("------------------------------------------------------\n");
@@ -318,6 +351,7 @@ void MainMenu()
 	printf("22. Sort list (without guardian).\n");
 	printf("23. Sort list (with guardian).\n");
 	printf("24. Add to list sorted (without guardian).\n");
+	printf("25. Add to list sorted (with guardian).\n");
 	printf("------------------------------------------------------\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");
@@ -428,6 +462,11 @@ int main()
 		case 24:
 			x = SetValue();
 			AddToListSortedNG(&list_el, x);
+			system("pause");
+			break;
+		case 25:
+			x = SetValue();
+			AddToListSortedWG(&list_el, x);
 			system("pause");
 			break;
 		case 0:
