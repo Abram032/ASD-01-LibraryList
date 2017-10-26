@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Lists.h"
+#include "Functions.h"
+#include "Menu.h"
+#include "Sorting.h"
 
 /*
 	One way list with functions.
@@ -12,433 +15,6 @@
 	- Check sorting algorithms.
 	- ADD COMMENTS !!!
 */
-
-void AddUntilNegativeFront(ListEl *list_el)
-{
-	int x;
-	int loop = 1;
-	do
-	{
-		x = SetValue();
-		if (x >= 0)
-		{
-			AddToListFront(list_el, x);
-		}
-		else
-		{
-			loop = 0;
-		}
-	} while (loop == 1);
-}
-
-void AddUntilNegativeBack(ListEl *list_el)
-{
-	int x;
-	int loop = 1;
-	do
-	{
-		x = SetValue();
-		if (x >= 0)
-		{
-			AddToListBack(list_el, x);
-		}
-		else
-		{
-			loop = 0;
-		}
-	} while (loop == 1);
-}
-
-void RemoveValue(ListEl *list_el, int x)
-{
-	if (ListEmpty(*list_el) == 0)
-	{
-		ListEl current_element = *list_el;
-		ListEl previous_element = *list_el;
-		while (current_element != NULL)
-		{
-			if (current_element->value == x)
-			{
-				if (current_element == previous_element)
-				{
-					previous_element = current_element->next;
-					*list_el = previous_element;
-					free(current_element);
-					current_element = previous_element;
-				}
-				else
-				{
-					previous_element->next = current_element->next;
-					free(current_element);
-					current_element = previous_element;
-				}
-			}
-			else
-			{
-				previous_element = current_element;
-				current_element = current_element->next;
-			}
-		}
-	}
-}
-
-void RemoveValueRecursive(ListEl *list_el, int x)
-{
-	if (ListEmpty(*list_el) == 0)
-	{
-		ListEl previous_element = *list_el;
-		ListEl current_element = *list_el;
-		if (current_element->value == x)
-		{
-			if (current_element == previous_element)
-			{
-				previous_element = current_element->next;
-				*list_el = previous_element;
-				free(current_element);
-				current_element = previous_element;
-				RemoveValueRecursive(&(*list_el), x);
-			}
-		}
-		else
-		{
-			RemoveValueRecursive(&(*list_el)->next, x);
-		}
-	}
-}
-
-void MostFrequentValue(ListEl *list_el)
-{
-	if (ListEmpty(*list_el) == 0)
-	{
-		ListEl current_element = *list_el;
-		int array_size = 0;
-		int *value_array, *count_array;
-		int value, count;
-		int position = 0;
-		int value_exists, value_position;
-		while (current_element != NULL)
-		{
-			array_size++;
-			current_element = current_element->next;
-		}
-		current_element = *list_el;
-		value_array = (int*)malloc(array_size * sizeof(*value_array));
-		count_array = (int*)malloc(array_size * sizeof(*count_array));
-		while (current_element != NULL)
-		{
-			value = current_element->value;
-			value_exists = 0;
-			for (int i = 0; i < array_size; i++)
-			{
-				if (value == value_array[i])
-				{
-					value_exists = 1;
-					value_position = i;
-					break;
-				}
-			}
-			if (value_exists == 1)
-			{
-				count_array[value_position]++;
-			}
-			else
-			{
-				value_array[position] = value;
-				count_array[position] = 1;
-			}
-			position++;
-			current_element = current_element->next;
-		}
-		count = 0;
-		for (int i = 0; i < array_size; i++)
-		{
-			if (count_array[i] > count)
-			{
-				count = count_array[i];
-				value_position = i;
-			}
-		}
-		value = value_array[value_position];
-		count = count_array[value_position];
-		printf("The most occuring value is %d. It appeared %d times in list.\n", value, count);
-	}
-}
-
-void RemoveEven(ListEl *list_el)
-{
-	if (ListEmpty(*list_el) == 0)
-	{
-		ListEl current_element = *list_el;
-		ListEl previous_element = *list_el;
-		while (current_element != NULL)
-		{
-			if (current_element->value % 2 == 0)
-			{
-				if (current_element == previous_element)
-				{
-					previous_element = current_element->next;
-					*list_el = previous_element;
-					free(current_element);
-					current_element = previous_element;
-				}
-				else
-				{
-					previous_element->next = current_element->next;
-					free(current_element);
-					current_element = previous_element;
-				}
-			}
-			else
-			{
-				previous_element = current_element;
-				current_element = current_element->next;
-			}
-		}
-	}
-}
-
-void SortList(ListEl *list_el)
-{
-	if (ListEmpty(list_el) == 0)
-	{
-		ListEl current_element = *list_el;
-		ListEl minimal_element = *list_el;
-		ListEl minimum = *list_el;
-		int temp_value;
-		while (current_element != NULL)
-		{
-			minimum = current_element;
-			while (minimal_element != NULL)
-			{
-				if (minimal_element->value <= minimum->value)
-				{
-					minimum = minimal_element;
-				}
-				minimal_element = minimal_element->next;
-			}
-			temp_value = current_element->value;
-			current_element->value = minimum->value;
-			minimum->value = temp_value;
-			current_element = current_element->next;
-			minimal_element = current_element;
-		}
-	}
-}
-
-/*
-void SortListWG(ListEl *list_el)
-{
-	if (ListEmpty(list_el) == 0)
-	{
-		ListEl current_element = *list_el;
-		ListEl minimal_element = *list_el;
-		ListEl minimum = *list_el;
-		int temp_value;
-		while (current_element != NULL)
-		{
-			minimum = current_element;
-			AddToListBack(list_el, NULL);
-			while (minimal_element->value != NULL)
-			{
-				if (minimal_element->value <= minimum->value)
-				{
-					minimum = minimal_element;
-				}
-				minimal_element = minimal_element->next;
-			}
-			RemoveFromListBack(list_el);
-			temp_value = current_element->value;
-			current_element->value = minimum->value;
-			minimum->value = temp_value;
-			current_element = current_element->next;
-			minimal_element = current_element;
-		}
-	}
-}
-*/
-
-void AddToListSortedNG(ListEl *list_el, int x)
-{
-	if (ListEmpty(*list_el) == 0)
-	{
-		ListEl current_element = *list_el;
-		ListEl future_element = current_element->next;
-		ListEl new_element = malloc(sizeof(List));
-		if (current_element->value >= x)
-		{
-			AddToListFront(list_el, x);
-		}
-		else
-		{
-			while (current_element->next != NULL)
-			{
-				if (future_element->value >= x)
-				{
-					break;
-				}
-				else
-				{
-					current_element = future_element;
-					future_element = future_element->next;
-				}
-			}
-			future_element = current_element->next;
-			new_element->value = x;
-			current_element->next = new_element;
-			new_element->next = future_element;
-		}
-	}
-	else
-	{
-		AddToListFront(list_el, x);
-	}
-}
-
-void AddToListSortedWG(ListEl *list_el, int x)
-{
-	if (ListEmpty(*list_el) == 0)
-	{
-		AddToListBack(list_el, x);
-		ListEl current_element = *list_el;
-		ListEl future_element = current_element->next;
-		ListEl new_element = malloc(sizeof(List));	
-		if (current_element->value >= x)
-		{
-			AddToListFront(list_el, x);
-			RemoveFromListBack(list_el);
-		}
-		else
-		{
-			while (future_element->value < x)
-			{
-					current_element = future_element;
-					future_element = future_element->next;
-			}
-			future_element = current_element->next;
-			new_element->value = x;
-			current_element->next = new_element;
-			new_element->next = future_element;
-			RemoveFromListBack(list_el);
-		}
-	}
-	else
-	{
-		AddToListFront(list_el, x);
-	}
-}
-
-void CompareLists(ListEl *list_a, ListEl *list_b, ListEl *list_aw, ListEl *list_bw)
-{
-	if (ListEmpty(list_a) && ListEmpty(list_b) == 1)
-	{
-		return;
-	}
-	else
-	{
-		if (ListEmpty(list_a) == 1)
-		{
-			ViewList(list_b);
-			return;
-		}
-		if (ListEmpty(list_b) == 1)
-		{
-			ViewList(list_a);
-			return;
-		}
-		//Sprawdzania listy a -> b
-		ListEl current_element_a = *list_a;
-		ListEl current_element_b = *list_b;
-		int value;
-		while (current_element_a != NULL)
-		{
-			value = current_element_a->value;
-			AddToListBack(list_aw, value);
-			while (current_element_b->next != NULL)
-			{
-				if (current_element_b->value == value)
-				{
-					RemoveFromListBack(list_aw);
-					break;
-				}
-				current_element_b = current_element_b->next;
-			}
-			current_element_a = current_element_a->next;
-			current_element_b = *list_b;	
-		}
-		//Sprawdzanie lista b -> a
-		current_element_a = *list_a;
-		current_element_b = *list_b;
-		while (current_element_b != NULL)
-		{
-			value = current_element_b->value;
-			AddToListBack(list_bw, value);
-			while (current_element_a->next != NULL)
-			{
-				if (current_element_a->value == value)
-				{
-					RemoveFromListBack(list_bw);
-					break;
-				}
-				current_element_a = current_element_a->next;
-			}
-			current_element_b = current_element_b->next;
-			current_element_a = *list_a;		
-		}
-		printf("List A\n");
-		ViewList(list_a);
-		printf("List AW\n");
-		ViewList(list_aw);
-		printf("List B\n");
-		ViewList(list_b);
-		printf("List BW\n");
-		ViewList(list_bw);
-	}
-}
-
-void MainMenu()
-{
-	printf("------------------------------------------------------\n");
-	printf("----------------------/ASD Lists/---------------------\n");
-	printf("------------------------------------------------------\n");
-	printf("1. Add to list front.\n");
-	printf("2. Add to list back.\n");
-	printf("3. Remove from front of the list.\n");
-	printf("4. Remove from back of the list.\n");
-	printf("5. Clear List.\n");
-	printf("6. Seek Value.\n");
-	printf("7. View List.\n");
-	printf("8. View List Backwards.\n");
-	printf("------------------------------------------------------\n");
-	printf("11. Add from front until user set negative value.\n");
-	printf("12. Add from back until user set negative value.\n");
-	printf("13. Remove Value from the list.\n");
-	printf("14. Remove Value recursive from the list.\n");
-	printf("15. Find most occuring value in the list.\n");
-	printf("16. Remove even values from the list.\n");
-	printf("------------------------------------------------------\n");
-	printf("20. Flip List.\n");
-	printf("21. Flip list recursive [NOT FINISHED].\n");
-	printf("22. Sort list.\n");
-	printf("23. Add to list sorted (without guardian).\n");
-	printf("24. Add to list sorted (with guardian).\n");
-	printf("------------------------------------------------------\n");
-	printf("31. Add to list A sorted (with guardian).\n");
-	printf("32. Add to list B sorted (with guardian).\n");
-	printf("33. View List A.\n");
-	printf("34. View List B.\n");
-	printf("35. Compare lists A and B.\n");
-	printf("------------------------------------------------------\n");
-	printf("0. Exit.\n");
-	printf("------------------------------------------------------\n");
-}
-
-int ChooseOption()
-{
-	int option;
-	printf("Choose option: ");
-	scanf(" %d", &option);
-	return option;
-}
 
 int main()
 {
@@ -450,6 +26,7 @@ int main()
 
 	int x;
 	int loop = 1;
+	int ow_loop = 1;
 	do
 	{
 		system("cls");
@@ -458,119 +35,147 @@ int main()
 		switch (option)
 		{
 		case 1:
-			x = SetValue();
-			AddToListFront(&list_el, x);
-			break;
-		case 2:
-			x = SetValue();
-			AddToListBack(&list_el, x);
-			break;
-		case 3:
-			RemoveFromListFront(&list_el);
-			system("pause");
-			break;
-		case 4:
-			RemoveFromListBack(&list_el);
-			system("pause");
-			break;
-		case 5:
-			ClearList(&list_el);
-			system("pause");
-			break;
-		case 6:
-			x = SetValue();
-			SeekValue(&list_el, x);
-			system("pause");
-			break;
-		case 7:
-			ViewList(&list_el);
-			system("pause");
-			break;
-		case 8:
-			ViewListBackwards(&list_el);
-			system("pause");
-			break;
-		case 11:
-			AddUntilNegativeFront(&list_el);
-			ViewList(&list_el);
-			printf("---\n");
-			ViewListBackwards(&list_el);
-			system("pause");
-			break;
-		case 12:
-			AddUntilNegativeBack(&list_el);
-			ViewList(&list_el);
-			printf("---\n");
-			ViewListBackwards(&list_el);
-			system("pause");
-			break;
-		case 13:
-			x = SetValue();
-			RemoveValue(&list_el, x);
-			system("pause");
-			break;
-		case 14:
-			x = SetValue();
-			RemoveValueRecursive(&list_el, x);
-			system("pause");
-			break;
-		case 15:
-			MostFrequentValue(&list_el);
-			system("pause");
-			break;
-		case 16:
-			RemoveEven(&list_el);
-			system("pause");
-			break;
-		case 20:
-			FlipList(&list_el);
-			system("pause");
-			break;
-		case 21:
-			FlipListRecursive(&list_el);
-			system("pause");
-			break;
-		case 22:
-			SortList(&list_el);
-			system("pause");
-			break;
-			/*
-		case 23:
-			SortListWG(&list_el);
-			system("pause");
-			break;
-			*/
-		case 23:
-			x = SetValue();
-			AddToListSortedNG(&list_el, x);
-			system("pause");
-			break;
-		case 24:
-			x = SetValue();
-			AddToListSortedWG(&list_el, x);
-			system("pause");
-			break;
-		case 31:
-			x = SetValue();
-			AddToListSortedWG(&list_a, x);
-			system("pause");
-			break;
-		case 32:
-			x = SetValue();
-			AddToListSortedWG(&list_b, x);
-			system("pause");
-			break;
-		case 33:
-			ViewList(&list_a);
-			system("pause");
-			break;
-		case 34:
-			ViewList(&list_b);
-			system("pause");
-			break;
-		case 35:	
-			CompareLists(&list_a, &list_b, &list_aw, &list_bw);
-			system("pause");
+			loop = 1;
+			ow_loop = 1;
+			do
+			{
+				system("cls");
+				MainMenuOneWay();
+				int option_ow = ChooseOption();
+				switch (option_ow)
+				{
+				case 1:
+					x = SetValue();
+					AddToListFront(&list_el, x);
+					break;
+				case 2:
+					x = SetValue();
+					AddToListBack(&list_el, x);
+					break;
+				case 3:
+					RemoveFromListFront(&list_el);
+					system("pause");
+					break;
+				case 4:
+					RemoveFromListBack(&list_el);
+					system("pause");
+					break;
+				case 5:
+					ClearList(&list_el);
+					system("pause");
+					break;
+				case 6:
+					x = SetValue();
+					SeekValue(&list_el, x);
+					system("pause");
+					break;
+				case 7:
+					ViewList(&list_el);
+					system("pause");
+					break;
+				case 8:
+					ViewListBackwards(&list_el);
+					system("pause");
+					break;
+				case 11:
+					AddUntilNegativeFront(&list_el);
+					ViewList(&list_el);
+					printf("---\n");
+					ViewListBackwards(&list_el);
+					system("pause");
+					break;
+				case 12:
+					AddUntilNegativeBack(&list_el);
+					ViewList(&list_el);
+					printf("---\n");
+					ViewListBackwards(&list_el);
+					system("pause");
+					break;
+				case 13:
+					x = SetValue();
+					RemoveValue(&list_el, x);
+					system("pause");
+					break;
+				case 14:
+					x = SetValue();
+					RemoveValueRecursive(&list_el, x);
+					system("pause");
+					break;
+				case 15:
+					MostFrequentValue(&list_el);
+					system("pause");
+					break;
+				case 16:
+					RemoveEven(&list_el);
+					system("pause");
+					break;
+				case 20:
+					FlipList(&list_el);
+					system("pause");
+					break;
+				case 21:
+					FlipListRecursive(&list_el);
+					system("pause");
+					break;
+				case 22:
+					SortList(&list_el);
+					system("pause");
+					break;
+					/*
+					case 23:
+					SortListWG(&list_el);
+					system("pause");
+					break;
+					*/
+				case 23:
+					x = SetValue();
+					AddToListSortedNG(&list_el, x);
+					system("pause");
+					break;
+				case 24:
+					x = SetValue();
+					AddToListSortedWG(&list_el, x);
+					system("pause");
+					break;
+				case 31:
+					x = SetValue();
+					AddToListSortedWG(&list_a, x);
+					system("pause");
+					break;
+				case 32:
+					x = SetValue();
+					AddToListSortedWG(&list_b, x);
+					system("pause");
+					break;
+				case 33:
+					ViewList(&list_a);
+					system("pause");
+					break;
+				case 34:
+					ViewList(&list_b);
+					system("pause");
+					break;
+				case 35:
+					CompareLists(&list_a, &list_b, &list_aw, &list_bw);
+					system("pause");
+					break;
+				case 36:
+					ConnectAndSortLists(&list_a, &list_b);
+					system("pause");
+				case 99:
+					ow_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					ow_loop = 0;
+					loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.");
+					break;
+				}
+			} while (ow_loop == 1);
 			break;
 		case 0:
 			loop = 0;
@@ -581,7 +186,10 @@ int main()
 			break;
 		}
 	} while (loop == 1);
-
 	ClearList(&list_el);
+	ClearList(&list_a);
+	ClearList(&list_b);
+	ClearList(&list_aw);
+	ClearList(&list_bw);
 	return 0;
 }
