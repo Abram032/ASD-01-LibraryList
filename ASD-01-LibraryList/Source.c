@@ -27,6 +27,7 @@ int main()
 	int x;
 	int loop = 1;
 	int ow_loop = 1;
+	int tw_loop = 1;
 	do
 	{
 		system("cls");
@@ -35,7 +36,6 @@ int main()
 		switch (option)
 		{
 		case 1:
-			loop = 1;
 			ow_loop = 1;
 			do
 			{
@@ -162,6 +162,11 @@ int main()
 				case 36:
 					ConnectAndSortLists(&list_a, &list_b);
 					system("pause");
+					break;
+				case 37:
+					ConnectLists(&list_a, &list_b);
+					system("pause");
+					break;
 				case 99:
 					ow_loop = 0;
 					system("pause");
@@ -176,6 +181,20 @@ int main()
 					break;
 				}
 			} while (ow_loop == 1);
+			break;
+		case 2:
+			do
+			{
+				system("cls");
+				int option_tw = ChooseOption();
+			} while (tw_loop == 1);
+			system("pause");
+			break;
+		case 3:
+			system("pause");
+			break;
+		case 4:
+			system("pause");
 			break;
 		case 0:
 			loop = 0;

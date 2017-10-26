@@ -8,6 +8,9 @@ void MainMenu()
 	printf("----------------------/ASD Lists/---------------------\n");
 	printf("------------------------------------------------------\n");
 	printf("1. One Way Lists\n");
+	printf("2. Two Way Lists\n");
+	printf("3. Two Way Lists Cyclic\n");
+	printf("4. Priority Queue\n");
 	printf("------------------------------------------------------\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");
@@ -46,6 +49,7 @@ void MainMenuOneWay()
 	printf("34. View List B.\n");
 	printf("35. Compare lists A and B.\n");
 	printf("36. Connect and sort lists A and B\n");
+	printf("37. Connect lists A and B\n");
 	printf("------------------------------------------------------\n");
 	printf("99. Go back to main menu.\n");
 	printf("0. Exit.\n");

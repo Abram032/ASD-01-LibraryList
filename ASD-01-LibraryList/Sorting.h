@@ -197,5 +197,77 @@ void ConnectAndSortLists(ListEl *list_a, ListEl *list_b)
 		*list_a = head_a;
 		SortList(list_a);
 		ViewList(list_a);
+		ClearList(list_a);
+		ClearList(list_b);
+	}
+}
+
+void ConnectLists(ListEl *list_a, ListEl *list_b)
+{
+	if (ListEmpty(list_a) == 1)
+	{
+		ViewList(list_b);
+	}
+	if (ListEmpty(list_b) == 1)
+	{
+		ViewList(list_a);
+	}
+	if (ListEmpty(list_a) == 0 && ListEmpty(list_b) == 0)
+	{
+		ListEl current_element_a = *list_a;
+		ListEl current_element_b = *list_b;
+		ListEl future_element_a = current_element_a->next;
+		ListEl future_element_b = current_element_b->next;
+		ListEl head;
+		if (current_element_a->value <= current_element_b->value)
+		{
+			head = *list_a;
+		}
+		else
+		{
+			head = *list_b;
+		}
+		while (current_element_a != NULL || current_element_b != NULL)
+		{
+			if (current_element_b->value <= current_element_a->value)
+			{
+				current_element_a = future_element_a;
+				if (future_element_a != NULL)
+				{
+					future_element_a = future_element_a->next;
+				}
+
+				if (current_element_b->value >= current_element_a->value)
+				{
+					current_element_a->next = current_element_b;
+					current_element_a = future_element_a;
+					if (future_element_a != NULL)
+					{
+						future_element_a = future_element_a->next;
+					}	
+				}
+			}
+			else if (current_element_a->value <= current_element_b->value)
+			{
+				current_element_b = future_element_b;
+				if (future_element_b != NULL)
+				{
+					future_element_b = future_element_b->next;
+				}
+
+				if (current_element_a->value >= current_element_b->value)
+				{
+					current_element_b->next = current_element_a;
+					current_element_b = future_element_b;
+					if (future_element_b != NULL)
+					{
+						future_element_b = future_element_b->next;
+					}
+				}
+			}
+		}
+		*list_a = head;
+		*list_b = head;
+		ViewList(list_a);
 	}
 }
