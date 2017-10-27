@@ -178,16 +178,10 @@ void FlipList(ListEl *list_el)
 		ListEl current_element = *list_el;
 		ListEl previous_element = *list_el;
 		ListEl future_element = *list_el;
-		if (current_element != NULL)
+		if (current_element->next != NULL)
 		{
 			current_element = current_element->next;
-		}
-		if (future_element != NULL)
-		{
-			if (current_element != NULL)
-			{
-				future_element = current_element->next;
-			}
+			future_element = current_element->next;
 		}
 		previous_element->next = NULL;
 		while (current_element != NULL)

@@ -11,9 +11,9 @@ Assigment Checklist:
 3. DONE (Optional)
 4. DONE (Optional)
 5. Recursive version left
-6. DONE [Needs checking]
-7. Not Started (Optional)
-8. Not Started (Optional)
+6. DONE
+7. DONE (Optional)
+8. DONE (Optional)
 9. Not Started
 10. Not Started (Optional)
 11. Not Started (Optional)
