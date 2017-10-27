@@ -146,6 +146,7 @@
     <ClInclude Include="Lists.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Sorting.h" />
+    <ClInclude Include="TestInput.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

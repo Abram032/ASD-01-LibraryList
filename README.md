@@ -12,7 +12,7 @@ Assigment Checklist:
 4. DONE (Optional)
 5. Recursive version left
 6. DONE [Needs checking]
-7. DONE [Needs checking] (Optional)
+7. DONE (Optional)
 8. DONE (Optional)
 9. Not Started
 10. Not Started (Optional)

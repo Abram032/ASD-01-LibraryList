@@ -6,6 +6,7 @@
 #include "Functions.h"
 #include "Menu.h"
 #include "Sorting.h"
+#include "TestInput.h"
 
 /*
 	One way list with functions.
@@ -121,12 +122,6 @@ int main()
 					SortList(&list_el);
 					system("pause");
 					break;
-					/*
-					case 23:
-					SortListWG(&list_el);
-					system("pause");
-					break;
-					*/
 				case 23:
 					x = SetValue();
 					AddToListSortedNG(&list_el, x);

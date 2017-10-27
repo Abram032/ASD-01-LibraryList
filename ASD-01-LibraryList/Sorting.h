@@ -174,7 +174,7 @@ void CompareLists(ListEl *list_a, ListEl *list_b, ListEl *list_aw, ListEl *list_
 	}
 }
 
-void ConnectAndSortLists(ListEl *list_a, ListEl *list_b) 
+void ConnectAndSortLists(ListEl *list_a, ListEl *list_b)
 {
 	if (ListEmpty(*list_a) == 1)
 	{
@@ -216,58 +216,64 @@ void ConnectLists(ListEl *list_a, ListEl *list_b)
 	{
 		ListEl current_element_a = *list_a;
 		ListEl current_element_b = *list_b;
-		ListEl future_element_a = current_element_a->next;
-		ListEl future_element_b = current_element_b->next;
+		ListEl flag;
 		ListEl head;
 		if (current_element_a->value <= current_element_b->value)
 		{
 			head = *list_a;
+			flag = head;
 		}
 		else
 		{
 			head = *list_b;
+			flag = head;
 		}
-		while (current_element_a != NULL || current_element_b != NULL)
+		if (current_element_a->value == current_element_b->value)
 		{
-			if (current_element_b->value <= current_element_a->value)
+			flag = current_element_a->next;
+			current_element_a->next = current_element_b;
+			current_element_a = flag;
+			flag = current_element_b;
+		}
+		while (flag != NULL)
+		{
+			if (flag == current_element_a->next || flag == current_element_a)
 			{
-				current_element_a = future_element_a;
-				if (future_element_a != NULL)
-				{
-					future_element_a = future_element_a->next;
-				}
-
-				if (current_element_b->value >= current_element_a->value)
+				if (flag->value > current_element_b->value)
 				{
 					current_element_a->next = current_element_b;
-					current_element_a = future_element_a;
-					if (future_element_a != NULL)
+					current_element_a = flag;
+					flag = current_element_b;
+				}
+				else
+				{
+					current_element_a = flag;
+					flag = flag->next;
+					if (flag == NULL)
 					{
-						future_element_a = future_element_a->next;
-					}	
+						current_element_a->next = current_element_b;
+					}
 				}
 			}
-			else if (current_element_a->value <= current_element_b->value)
+			else
 			{
-				current_element_b = future_element_b;
-				if (future_element_b != NULL)
-				{
-					future_element_b = future_element_b->next;
-				}
-
-				if (current_element_a->value >= current_element_b->value)
+				if (flag->value > current_element_a->value)
 				{
 					current_element_b->next = current_element_a;
-					current_element_b = future_element_b;
-					if (future_element_b != NULL)
+					current_element_b = flag;
+					flag = current_element_a;
+				}
+				else
+				{
+					current_element_b = flag;
+					flag = flag->next;
+					if (flag == NULL)
 					{
-						future_element_b = future_element_b->next;
+						current_element_b->next = current_element_a;
 					}
 				}
 			}
 		}
-		*list_a = head;
-		*list_b = head;
-		ViewList(list_a);
+		ViewList(&head);
 	}
 }
