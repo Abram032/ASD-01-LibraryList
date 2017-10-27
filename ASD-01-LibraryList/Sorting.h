@@ -77,7 +77,7 @@ void AddToListSortedWG(ListEl *list_el, int x)
 {
 	if (ListEmpty(*list_el) == 0)
 	{
-		AddToListBack(list_el, INT_MAX);
+		AddToListBack(list_el, x);
 		ListEl current_element = *list_el;
 		ListEl future_element = current_element->next;
 		ListEl new_element = malloc(sizeof(List));
@@ -88,7 +88,7 @@ void AddToListSortedWG(ListEl *list_el, int x)
 		}
 		else
 		{
-			while (future_element->value < INT_MAX)
+			while (future_element->value < x)
 			{
 				current_element = future_element;
 				future_element = future_element->next;
