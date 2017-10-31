@@ -26,6 +26,14 @@ int TWListEmpty(TWListEl *tw_list_el)
 	}
 }
 
+void MoveTWC(TWListEl *tw_list_el, int x)
+{
+	if (TWListEmpty(*tw_list_el) == 0)
+	{
+		*tw_list_el = (*tw_list_el)->next;
+	}
+}
+
 void AddToTWList(TWListEl *tw_list_el, int x)
 {
 	TWListEl new_element = malloc(sizeof(TWList));
@@ -145,20 +153,6 @@ void RemoveElementTW(TWListEl *tw_list_el)
 	if (TWListEmpty(*tw_list_el) == 0)
 	{
 		TWListEl current_element = *tw_list_el;
-		TWListEl future_element = current_element->next;
-		if (future_element != NULL)
-		{
-			future_element->prev = NULL;
-		}
-		free(current_element);
-	}
-}
-
-void RemoveElementTWC(TWListEl *tw_list_el)
-{
-	if (TWListEmpty(*tw_list_el) == 0)
-	{
-		TWListEl current_element = *tw_list_el;
 		TWListEl previous_element = current_element->prev;
 		TWListEl future_element = current_element->next;
 		if (previous_element != NULL)
@@ -178,61 +172,71 @@ void RemoveValueTW(TWListEl *tw_list_el, int x)
 	if (TWListEmpty(*tw_list_el) == 0)
 	{
 		TWListEl current_element = *tw_list_el;
-		TWListEl previous_element = current_element->prev;
-		TWListEl future_element = current_element->next;
 		while (current_element != NULL)
 		{
 			if (current_element->value == x)
 			{
-				if (previous_element != NULL)
-				{
-					previous_element->next = future_element;
-				}
-				if (future_element != NULL)
-				{
-					future_element->prev = previous_element;
-				}
-				free(current_element);
+				RemoveElementTW(current_element);
+				break;
 			}
 			else
 			{
-				previous_element = current_element;
-				current_element = future_element;
-				future_element = future_element->next;
+				current_element = current_element->next;
 			}
 		}
 	}
 }
 
-//POPRAWIC
 void RemoveValueTWC(TWListEl *tw_list_el, int x)
 {
 	if (TWListEmpty(*tw_list_el) == 0)
 	{
 		TWListEl current_element = *tw_list_el;
-		TWListEl previous_element = current_element->prev;
-		TWListEl future_element = current_element->next;
 		TWListEl flag = *tw_list_el;
 		do
 		{
 			if (current_element->value == x)
 			{
-				if (previous_element != NULL)
-				{
-					previous_element->next = future_element;
-				}
-				if (future_element != NULL)
-				{
-					future_element->prev = previous_element;
-				}
-				free(current_element);
+				RemoveElementTWC(current_element);
+				break;
 			}
 			else
 			{
-				previous_element = current_element;
-				current_element = future_element;
-				future_element = future_element->next;
+				current_element = current_element->next;
 			}
+		} while (current_element != flag);
+	}
+}
+
+void ViewTWList(TWListEl *tw_list_el)
+{
+	if (TWListEmpty(*tw_list_el) == 0)
+	{
+		TWListEl current_element = *tw_list_el;
+		int x, i = 1;
+		while (current_element != NULL)
+		{
+			x = current_element->value;
+			printf("[%d]. %d", i, x);
+			i++;
+			current_element = current_element->next;
+		}
+	}
+}
+
+void ViewTWCList(TWListEl *tw_list_el)
+{
+	if (TWListEmpty(*tw_list_el) == 0)
+	{
+		TWListEl current_element = *tw_list_el;
+		TWListEl flag = *tw_list_el;
+		int x, i = 1;
+		do
+		{
+			x = current_element->value;
+			printf("[%d]. %d", i, x);
+			i++;
+			current_element = current_element->next;
 		} while (current_element != flag);
 	}
 }
