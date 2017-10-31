@@ -7,6 +7,7 @@
 #include "Menu.h"
 #include "Sorting.h"
 #include "TestInput.h"
+#include "Lists_tw.h"
 
 /*
 	One way list with functions.
@@ -24,6 +25,8 @@ int main()
 	List *list_b = NULL;
 	List *list_aw = NULL;
 	List *list_bw = NULL;
+	TWList *tw_list_el = NULL;
+	TWList *twc_list_el = NULL;
 
 	int x;
 	int loop = 1;
