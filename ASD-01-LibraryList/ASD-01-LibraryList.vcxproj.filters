@@ -35,5 +35,11 @@
     <ClInclude Include="TestInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Lists_tw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lists_twc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

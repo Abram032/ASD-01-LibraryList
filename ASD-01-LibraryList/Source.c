@@ -8,6 +8,7 @@
 #include "Sorting.h"
 #include "TestInput.h"
 #include "Lists_tw.h"
+#include "Lists_twc.h"
 
 /*
 	One way list with functions.
@@ -32,6 +33,7 @@ int main()
 	int loop = 1;
 	int ow_loop = 1;
 	int tw_loop = 1;
+	int twc_loop = 1;
 	do
 	{
 		system("cls");
@@ -172,10 +174,9 @@ int main()
 				case 0:
 					ow_loop = 0;
 					loop = 0;
-					system("pause");
 					break;
 				default:
-					printf("\nUnknown option.");
+					printf("\nUnknown option.\n");
 					break;
 				}
 			} while (ow_loop == 1);
@@ -184,11 +185,111 @@ int main()
 			do
 			{
 				system("cls");
+				MainMenuTwoWay();
 				int option_tw = ChooseOption();
+				switch (option_tw)
+				{
+				case 1:
+					x = SetValue();
+					AddToTWList(&tw_list_el, x);
+					system("pause");
+					break;
+				case 2:
+					RemoveElementTW(&tw_list_el);
+					system("pause");
+					break;
+				case 3:
+					x = SetValue();
+					SeekValueTW(&tw_list_el, x);
+					system("pause");
+					break;
+				case 4:
+					x = SetValue();
+					RemoveValueTW(&tw_list_el, x);
+					system("pause");
+					break;
+				case 5:
+					ViewTWList(&tw_list_el);
+					system("pause");
+					break;
+				case 6:
+					ClearTWList(&tw_list_el);
+					system("pause");
+					break;
+				case 99:
+					tw_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					tw_loop = 0;
+					break;
+				default:
+					printf("\nUnknown option.\n");
+					system("pause");
+					break;
+				}
 			} while (tw_loop == 1);
 			system("pause");
 			break;
 		case 3:
+			do
+			{
+				system("cls");
+				MainMenuTwoWayCyclic();
+				int option_twc = ChooseOption();
+				switch (option_twc)
+				{
+				case 1:
+					x = SetValue();
+					AddToTWCList(&twc_list_el, x);
+					system("pause");
+					break;
+				case 2:
+					MoveTWC(&twc_list_el);
+					system("pause");
+					break;
+				case 3:
+					RemoveElementTWC(&twc_list_el);
+					system("pause");
+					break;
+				case 4:
+					x = SetValue();
+					SeekValueTWC(&twc_list_el, x);
+					system("pause");
+					break;
+				case 5:
+					x = SetValue();
+					RemoveValueTWC(&twc_list_el, x);
+					system("pause");
+					break;
+				case 6:
+					ViewTWCList(&twc_list_el);
+					system("pause");
+					break;
+				case 7:
+					ClearTWCList(&twc_list_el);
+					system("pause");
+					break;
+				case 8:
+					ScrollTWC(&twc_list_el);
+					system("pause");
+					break;
+				case 99:
+					twc_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					twc_loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.\n");
+					system("pause");
+					break;
+				}
+			} while (twc_loop == 1);
 			system("pause");
 			break;
 		case 4:

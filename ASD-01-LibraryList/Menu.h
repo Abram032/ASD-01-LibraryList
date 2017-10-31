@@ -56,6 +56,42 @@ void MainMenuOneWay()
 	printf("------------------------------------------------------\n");
 }
 
+void MainMenuTwoWay()
+{
+	printf("------------------------------------------------------\n");
+	printf("----------------------/ASD Lists/---------------------\n");
+	printf("------------------------------------------------------\n");
+	printf("1. Add to two way list.\n");
+	printf("2. Remove from two way list.\n");
+	printf("3. Seek value in two way list.\n");
+	printf("4. Remove value from two way list.\n");
+	printf("5. View two way list.\n");
+	printf("6. Clear two way list.\n");
+	printf("------------------------------------------------------\n");
+	printf("99. Go back to main menu.\n");
+	printf("0. Exit.\n");
+	printf("------------------------------------------------------\n");
+}
+
+void MainMenuTwoWayCyclic()
+{
+	printf("------------------------------------------------------\n");
+	printf("----------------------/ASD Lists/---------------------\n");
+	printf("------------------------------------------------------\n");
+	printf("1. Add to cyclic two way list.\n");
+	printf("2. Move forward in cyclic two way list.\n");
+	printf("3. Remove from cyclic two way list.\n");
+	printf("4. Seek value in cyclic two way list.\n");
+	printf("5. Remove value from cyclic two way list.\n");
+	printf("6. View cyclic two way list.\n");
+	printf("7. Clear cyclic two way list.\n");
+	printf("8. Scroll cyclic two way list.\n");
+	printf("------------------------------------------------------\n");
+	printf("99. Go back to main menu.\n");
+	printf("0. Exit.\n");
+	printf("------------------------------------------------------\n");
+}
+
 int ChooseOption()
 {
 	int option;

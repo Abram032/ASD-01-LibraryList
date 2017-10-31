@@ -26,14 +26,6 @@ int TWListEmpty(TWListEl *tw_list_el)
 	}
 }
 
-void MoveTWC(TWListEl *tw_list_el, int x)
-{
-	if (TWListEmpty(*tw_list_el) == 0)
-	{
-		*tw_list_el = (*tw_list_el)->next;
-	}
-}
-
 void AddToTWList(TWListEl *tw_list_el, int x)
 {
 	TWListEl new_element = malloc(sizeof(TWList));
@@ -71,37 +63,18 @@ void AddToTWList(TWListEl *tw_list_el, int x)
 				}
 			}
 			current_element->next = new_element;
-			future_element->prev = new_element;
 			new_element->prev = current_element;
-			new_element->next = future_element;
+			if (future_element != NULL)
+			{
+				future_element->prev = new_element;
+				new_element->next = future_element;
+			}
+			else
+			{
+				future_element = new_element;
+				future_element->next = NULL;
+			}
 		}
-	}
-}
-
-void AddToTWCList(TWListEl *twc_list_el, int x)
-{
-	TWListEl new_element = malloc(sizeof(TWList));
-	new_element->value = x;
-
-	if (TWListEmpty(*twc_list_el) == 1)
-	{
-		new_element->next = new_element;
-		new_element->prev = new_element;
-		*twc_list_el = new_element;
-	}
-	else
-	{
-		TWListEl current_element = *twc_list_el;
-		TWListEl future_element = current_element->next;
-		while (future_element->value < x)
-		{
-			current_element = future_element;
-			future_element = future_element->next;
-		}
-		current_element->next = new_element;
-		future_element->prev = new_element;
-		new_element->prev = current_element;
-		new_element->next = future_element;
 	}
 }
 
@@ -115,7 +88,9 @@ void SeekValueTW(TWListEl *tw_list_el, int x)
 		{
 			if (current_element->value == x)
 			{
-				printf(" %d is on the %d position", x, i);
+				printf(" %d is on the %d position.\n", x, i);
+				current_element = current_element->next;
+				i++;
 			}
 			else
 			{
@@ -123,28 +98,6 @@ void SeekValueTW(TWListEl *tw_list_el, int x)
 				i++;
 			}
 		}
-	}
-}
-
-void SeekValueTWC(TWListEl *tw_list_el, int x)
-{
-	if (TWListEmpty(*tw_list_el) == 0)
-	{
-		TWListEl flag = *tw_list_el;
-		TWListEl current_element = *tw_list_el;
-		int i = 1;
-		do
-		{
-			if (current_element->value == x)
-			{
-				printf(" %d is on the %d position", x, i);
-			}
-			else
-			{
-				current_element = current_element->next;
-				i++;
-			}
-		} while (flag != current_element);
 	}
 }
 
@@ -158,6 +111,10 @@ void RemoveElementTW(TWListEl *tw_list_el)
 		if (previous_element != NULL)
 		{
 			previous_element->next = future_element;
+		}
+		else
+		{
+			*tw_list_el = future_element;
 		}
 		if (future_element != NULL)
 		{
@@ -176,7 +133,15 @@ void RemoveValueTW(TWListEl *tw_list_el, int x)
 		{
 			if (current_element->value == x)
 			{
-				RemoveElementTW(current_element);
+				if (current_element == *tw_list_el)
+				{
+					*tw_list_el = (*tw_list_el)->next;
+					free(current_element);
+				}
+				else
+				{
+					RemoveElementTW(&current_element);
+				}
 				break;
 			}
 			else
@@ -184,27 +149,6 @@ void RemoveValueTW(TWListEl *tw_list_el, int x)
 				current_element = current_element->next;
 			}
 		}
-	}
-}
-
-void RemoveValueTWC(TWListEl *tw_list_el, int x)
-{
-	if (TWListEmpty(*tw_list_el) == 0)
-	{
-		TWListEl current_element = *tw_list_el;
-		TWListEl flag = *tw_list_el;
-		do
-		{
-			if (current_element->value == x)
-			{
-				RemoveElementTWC(current_element);
-				break;
-			}
-			else
-			{
-				current_element = current_element->next;
-			}
-		} while (current_element != flag);
 	}
 }
 
@@ -217,26 +161,20 @@ void ViewTWList(TWListEl *tw_list_el)
 		while (current_element != NULL)
 		{
 			x = current_element->value;
-			printf("[%d]. %d", i, x);
+			printf("[%d]. %d\n", i, x);
 			i++;
 			current_element = current_element->next;
 		}
 	}
 }
 
-void ViewTWCList(TWListEl *tw_list_el)
+void ClearTWList(TWListEl *tw_list_el)
 {
 	if (TWListEmpty(*tw_list_el) == 0)
 	{
-		TWListEl current_element = *tw_list_el;
-		TWListEl flag = *tw_list_el;
-		int x, i = 1;
-		do
+		while (*tw_list_el != NULL)
 		{
-			x = current_element->value;
-			printf("[%d]. %d", i, x);
-			i++;
-			current_element = current_element->next;
-		} while (current_element != flag);
+			RemoveElementTW(tw_list_el);
+		}
 	}
 }

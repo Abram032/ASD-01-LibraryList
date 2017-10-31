@@ -88,7 +88,7 @@ void AddToListSortedWG(ListEl *list_el, int x)
 		}
 		else
 		{
-			while (future_element->value < INT_MAX)
+			while (future_element->value < x)
 			{
 				current_element = future_element;
 				future_element = future_element->next;
