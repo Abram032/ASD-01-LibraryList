@@ -280,6 +280,11 @@ int main()
 					ScrollTWC(&twc_list_el);
 					system("pause");
 					break;
+				case 9:
+					x = SetValue();
+					RemoveUntilOne(&twc_list_el, x);
+					system("pause");
+					break;
 				case 99:
 					twc_loop = 0;
 					system("pause");

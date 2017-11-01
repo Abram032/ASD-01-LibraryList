@@ -161,3 +161,19 @@ void ClearTWCList(TWListEl *twc_list_el)
 		}
 	}
 }
+
+void RemoveUntilOne(TWListEl *twc_list_el, int k)
+{
+	if (TWListEmpty(*twc_list_el) == 0)
+	{
+		while (*twc_list_el != (*twc_list_el)->next)
+		{
+			for (int i = 0; i < k; i++)
+			{
+				*twc_list_el = (*twc_list_el)->next;
+			}
+			RemoveElementTWC(twc_list_el);
+		}
+		ViewTWCList(twc_list_el);
+	}
+}

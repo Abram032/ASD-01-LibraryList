@@ -87,6 +87,8 @@ void MainMenuTwoWayCyclic()
 	printf("7. Clear cyclic two way list.\n");
 	printf("8. Scroll cyclic two way list.\n");
 	printf("------------------------------------------------------\n");
+	printf("9. Remove from two way list until one element left.\n");
+	printf("------------------------------------------------------\n");
 	printf("99. Go back to main menu.\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");
