@@ -7,6 +7,7 @@
 #include "Sorting.h"
 #include "Functions.h"
 #include "Menu.h"
+#include "Lists_c.h"
 
 void SortList(ListEl *list_el)
 {

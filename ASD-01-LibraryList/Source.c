@@ -22,6 +22,8 @@
 int main()
 {
 	List *list_el = NULL;
+	List *list_el_ca = NULL;
+	List *list_el_cb = NULL;
 	List *list_a = NULL;
 	List *list_b = NULL;
 	List *list_aw = NULL;
@@ -32,6 +34,7 @@ int main()
 	int x;
 	int loop = 1;
 	int ow_loop = 1;
+	int owc_loop = 1;
 	int tw_loop = 1;
 	int twc_loop = 1;
 	do
@@ -182,6 +185,7 @@ int main()
 			} while (ow_loop == 1);
 			break;
 		case 2:
+			tw_loop = 1;
 			do
 			{
 				system("cls");
@@ -233,6 +237,7 @@ int main()
 			system("pause");
 			break;
 		case 3:
+			twc_loop = 1;
 			do
 			{
 				system("cls");
@@ -293,6 +298,77 @@ int main()
 			system("pause");
 			break;
 		case 4:
+			owc_loop = 1;
+			do
+			{
+				system("cls");
+				MainMenuOneWayCyclic();
+				int option_twc = ChooseOption();
+				switch (option_twc)
+				{
+				case 1:
+					x = SetValue();
+					AddToListCyclic(&list_el_ca, x);
+					system("pause");
+					break;
+				case 2:
+					RemoveFromListCyclic(&list_el_ca);
+					system("pause");
+					break;
+				case 3:
+					x = SetValue();
+					RemoveValueFromListCyclic(&list_el_ca, x);
+					system("pause");
+					break;
+				case 4:
+					ViewListCyclic(&list_el_ca);
+					system("pause");
+					break;
+				case 5:
+					ClearListCyclic(&list_el_ca);
+					system("pause");
+					break;
+				case 6:
+					x = SetValue();
+					AddToListCyclic(&list_el_cb, x);
+					system("pause");
+					break;
+				case 7:
+					RemoveFromListCyclic(&list_el_cb);
+					system("pause");
+					break;
+				case 8:
+					x = SetValue();
+					RemoveValueFromListCyclic(&list_el_cb, x);
+					system("pause");
+					break;
+				case 9:
+					ViewListCyclic(&list_el_cb);
+					system("pause");
+					break;
+				case 10:
+					ClearListCyclic(&list_el_cb);
+					system("pause");
+					break;
+				case 11:
+					RemoveValuesFromLists(&list_el_ca, &list_el_cb);
+					system("pause");
+					break;
+				case 99:
+					owc_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					owc_loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.\n");
+					system("pause");
+					break;
+				}
+			} while (owc_loop == 1);
 			system("pause");
 			break;
 		case 0:
