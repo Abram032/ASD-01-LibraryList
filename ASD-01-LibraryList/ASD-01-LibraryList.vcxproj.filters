@@ -44,5 +44,8 @@
     <ClInclude Include="Lists_c.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Lists_prior.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

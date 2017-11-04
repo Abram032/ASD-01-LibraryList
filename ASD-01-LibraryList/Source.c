@@ -9,6 +9,7 @@
 #include "TestInput.h"
 #include "Lists_tw.h"
 #include "Lists_twc.h"
+#include "Lists_prior.h"
 
 /*
 	One way list with functions.
@@ -30,13 +31,15 @@ int main()
 	List *list_bw = NULL;
 	TWList *tw_list_el = NULL;
 	TWList *twc_list_el = NULL;
+	PriorListEl *prior_list_el = NULL;
 
-	int x;
+	int x, p;
 	int loop = 1;
 	int ow_loop = 1;
 	int owc_loop = 1;
 	int tw_loop = 1;
 	int twc_loop = 1;
+	int prior_loop = 1;
 	do
 	{
 		system("cls");
@@ -374,6 +377,58 @@ int main()
 					break;
 				}
 			} while (owc_loop == 1);
+			system("pause");
+			break;
+		case 5:
+			prior_loop = 1;
+			do
+			{
+				system("cls");
+				MainMenuPriorList();
+				int option_prior = ChooseOption();
+				switch (option_prior)
+				{
+				case 1:
+					x = SetValue();
+					printf("Set priority: \n");
+					p = SetValue();
+					AddToPriorList(&prior_list_el, x, p);
+					system("pause");
+					break;
+				case 2:
+					RemoveFromPriorList(&prior_list_el);
+					system("pause");
+					break;
+				case 3:
+					x = SetValue();
+					printf("Set priority: \n");
+					p = SetValue();
+					ChangePriortiy(&prior_list_el, x, p);
+					system("pause");
+					break;
+				case 4:
+					ViewPriorList(&prior_list_el);
+					system("pause");
+					break;
+				case 5:
+					ClearPriorList(&prior_list_el);
+					system("pause");
+					break;
+				case 99:
+					prior_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					prior_loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.\n");
+					system("pause");
+					break;
+				}
+			} while (prior_loop == 1);
 			system("pause");
 			break;
 		case 0:

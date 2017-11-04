@@ -11,6 +11,7 @@ void MainMenu()
 	printf("2. Two Way Lists\n");
 	printf("3. Two Way Lists Cyclic\n");
 	printf("4. One Way Cyclic\n");
+	printf("5. Priority Lists\n");
 	printf("------------------------------------------------------\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");
@@ -112,6 +113,22 @@ void MainMenuOneWayCyclic()
 	printf("10. Clear list B.\n");
 	printf("------------------------------------------------------\n");
 	printf("11. Remove values from A list, from B list.\n");
+	printf("------------------------------------------------------\n");
+	printf("99. Go back to main menu.\n");
+	printf("0. Exit.\n");
+	printf("------------------------------------------------------\n");
+}
+
+void MainMenuPriorList()
+{
+	printf("------------------------------------------------------\n");
+	printf("----------------------/ASD Lists/---------------------\n");
+	printf("------------------------------------------------------\n");
+	printf("1. Add to priority list.\n");
+	printf("2. Remove from priority list.\n");
+	printf("3. Change priority of element.\n");
+	printf("4. View priority list.\n");
+	printf("5. Clear priortiy list.\n");
 	printf("------------------------------------------------------\n");
 	printf("99. Go back to main menu.\n");
 	printf("0. Exit.\n");
