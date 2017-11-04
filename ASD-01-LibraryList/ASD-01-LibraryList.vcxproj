@@ -144,6 +144,10 @@
   <ItemGroup>
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Lists.h" />
+    <ClInclude Include="Lists_c.h" />
+    <ClInclude Include="Lists_prior.h" />
+    <ClInclude Include="Lists_tw.h" />
+    <ClInclude Include="Lists_twc.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Sorting.h" />
     <ClInclude Include="TestInput.h" />

@@ -7,6 +7,7 @@
 #include "Sorting.h"
 #include "Functions.h"
 #include "Menu.h"
+#include "Lists_c.h"
 
 void SortList(ListEl *list_el)
 {
@@ -88,7 +89,7 @@ void AddToListSortedWG(ListEl *list_el, int x)
 		}
 		else
 		{
-			while (future_element->value < INT_MAX)
+			while (future_element->value < x)
 			{
 				current_element = future_element;
 				future_element = future_element->next;
