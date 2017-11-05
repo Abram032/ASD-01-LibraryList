@@ -10,13 +10,12 @@
 #include "Lists_tw.h"
 #include "Lists_twc.h"
 #include "Lists_prior.h"
+#include "Tree_Binary.h"
 
 /*
 	One way list with functions.
 
 	TODO:
-	- Flip List recursive.
-	- Check sorting algorithms.
 	- ADD COMMENTS !!!
 */
 
@@ -31,7 +30,9 @@ int main()
 	List *list_bw = NULL;
 	TWList *tw_list_el = NULL;
 	TWList *twc_list_el = NULL;
-	PriorListEl *prior_list_el = NULL;
+	PriorList *prior_list_el = NULL;
+
+	BinTree *b_tree = NULL;
 
 	int x, p;
 	int loop = 1;
@@ -40,6 +41,9 @@ int main()
 	int tw_loop = 1;
 	int twc_loop = 1;
 	int prior_loop = 1;
+
+	int bintree_loop = 1;
+
 	do
 	{
 		system("cls");
@@ -429,6 +433,41 @@ int main()
 					break;
 				}
 			} while (prior_loop == 1);
+			system("pause");
+			break;
+		case 6:
+			bintree_loop = 1;
+			do
+			{
+				system("cls");
+				MainMenuBinaryTree();
+				int option_bintree = ChooseOption();
+				switch (option_bintree)
+				{
+				case 1:
+					x = SetValue();
+					AddToBinTree(&b_tree, x);
+					system("pause");
+					break;
+				case 2:
+					ViewBinTree(&b_tree);
+					system("pause");
+					break;
+				case 99:
+					bintree_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					bintree_loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.\n");
+					system("pause");
+					break;
+				}
+			} while (bintree_loop == 1);
 			system("pause");
 			break;
 		case 0:

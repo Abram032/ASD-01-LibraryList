@@ -13,6 +13,8 @@ void MainMenu()
 	printf("4. One Way Cyclic\n");
 	printf("5. Priority Lists\n");
 	printf("------------------------------------------------------\n");
+	printf("6. Binary Trees\n");
+	printf("------------------------------------------------------\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");
 }
@@ -129,6 +131,19 @@ void MainMenuPriorList()
 	printf("3. Change priority of element.\n");
 	printf("4. View priority list.\n");
 	printf("5. Clear priortiy list.\n");
+	printf("------------------------------------------------------\n");
+	printf("99. Go back to main menu.\n");
+	printf("0. Exit.\n");
+	printf("------------------------------------------------------\n");
+}
+
+void MainMenuBinaryTree()
+{
+	printf("------------------------------------------------------\n");
+	printf("----------------------/ASD Lists/---------------------\n");
+	printf("------------------------------------------------------\n");
+	printf("1. Add to binary tree.\n");
+	printf("2. View binary tree.\n");
 	printf("------------------------------------------------------\n");
 	printf("99. Go back to main menu.\n");
 	printf("0. Exit.\n");

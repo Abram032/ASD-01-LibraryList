@@ -151,6 +151,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Sorting.h" />
     <ClInclude Include="TestInput.h" />
+    <ClInclude Include="Tree_Binary.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
