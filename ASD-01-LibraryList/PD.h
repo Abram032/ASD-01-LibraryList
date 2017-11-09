@@ -3,18 +3,9 @@
 #include <stdlib.h>
 #include <malloc.h>
 #include "Lists_twc.h"
+#include "Lists_tw.h"
 
-struct TWListElement
-{
-	int value;
-	struct TWListElement *next;
-	struct TWListElement *prev;
-};
-
-typedef struct TWListElement TWList;
-typedef TWList *TWListEl;
-
-TWListEl* PDSeekValueTWC(TWListEl *twc_list_el, int x)
+TWListEl * PDSeekValueTWC(TWListEl *twc_list_el, int x)
 {
 	if (*twc_list_el != NULL)
 	{
@@ -34,7 +25,7 @@ TWListEl* PDSeekValueTWC(TWListEl *twc_list_el, int x)
 				i++;
 			}
 		} while (flag != current_element);
-		return &current_element;
+		return current_element;
 	}
 	else
 	{
@@ -48,10 +39,11 @@ void PDConnectTWCLists(TWListEl *pd_twc_a, TWListEl *pd_twc_b)
 	{
 		TWListEl current_a = *pd_twc_a;
 		TWListEl current_b = *pd_twc_b;
+		TWListEl prev_a = current_a->prev;
 		TWListEl prev_b = current_b->prev;
-		current_a->next = current_b;
-		current_b->prev = current_a;
-		prev_b->next = current_a;
+		prev_a->next = current_b;
+		current_b->prev = prev_a;
 		current_a->prev = prev_b;
+		prev_b->next = current_a;
 	}
 }

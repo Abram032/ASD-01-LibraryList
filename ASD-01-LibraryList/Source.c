@@ -12,6 +12,7 @@
 #include "Lists_prior.h"
 #include "Tree_Binary.h"
 #include "PD.h"
+#include "ONP.h"
 
 /*
 	One way list with functions.
@@ -32,11 +33,16 @@ int main()
 	TWList *tw_list_el = NULL;
 	TWList *twc_list_el = NULL;
 	PriorList *prior_list_el = NULL;
+
 	TWList *twc_pd = NULL;
+	TWList *twc_pd_a = NULL;
+	TWList *twc_pd_b = NULL;
+	ONPS *onp_el = NULL;
 
 	BinTree *b_tree = NULL;
 
-	int x, p;
+	char operand;
+	int x, p, key;
 	int loop = 1;
 	int ow_loop = 1;
 	int owc_loop = 1;
@@ -485,7 +491,8 @@ int main()
 				{
 				case 1:
 					x = SetValue();
-					TWList *result = PDSeekValueTWC(&twc_pd, x);
+					TWList *result;
+					result = PDSeekValueTWC(&twc_pd, x);
 					if (result != NULL)
 					{
 						printf("Value = %d \n", result->value);
@@ -498,7 +505,71 @@ int main()
 					system("pause");
 					break;
 				case 2:
-					PDConnectTWCLists(&)
+					PDConnectTWCLists(&twc_pd_a, &twc_pd_b);
+					system("pause");
+					break;
+				case 4:
+					x = SetValue();
+					AddToTWCList(&twc_pd, x);
+					system("pause");
+					break;
+				case 5:
+					x = SetValue();
+					AddToTWCList(&twc_pd_a, x);
+					system("pause");
+					break;
+				case 6:
+					x = SetValue();
+					AddToTWCList(&twc_pd_b, x);
+					system("pause");
+					break;
+				case 10:
+					ViewTWCList(&twc_pd);
+					system("pause");
+					break;
+				case 11:
+					ViewTWCList(&twc_pd_a);
+					system("pause");
+					break;
+				case 12:
+					ViewTWCList(&twc_pd_b);
+					system("pause");
+					break;
+				case 20:
+					key = SetKey();
+					operand = NULL;
+					AddToONPStack(&onp_el, key, operand);
+					system("pause");
+					break;
+				case 21:
+					key = SetKey();
+					operand = NULL;
+					AddToONPStackBack(&onp_el, key, operand);
+					system("pause");
+					break;
+				case 22:
+					operand = SetOperand();
+					key = NULL;
+					AddToONPStack(&onp_el, key, operand);
+					system("pause");
+					break;
+				case 23:
+					operand = SetOperand();
+					key = NULL;
+					AddToONPStackBack(&onp_el, key, operand);
+					system("pause");
+					break;
+				case 24:
+					RemoveFromONPStack(&onp_el);
+					system("pause");
+					break;
+				case 25:
+					ViewONPStack(&onp_el);
+					system("pause");
+					break;
+				case 26:
+					key = ExecuteEquation(&onp_el);
+					printf("Result: %d\n", key);
 					system("pause");
 					break;
 				case 99:

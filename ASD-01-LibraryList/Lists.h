@@ -74,7 +74,6 @@ void ViewList(ListEl *list_el)
 			printf(" [%d]. %d\n", i, current_element->value);
 			current_element = current_element->next;
 		}
-		free(current_element);
 	}
 }
 

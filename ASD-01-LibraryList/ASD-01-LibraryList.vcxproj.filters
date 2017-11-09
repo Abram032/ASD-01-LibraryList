@@ -59,5 +59,8 @@
     <ClInclude Include="PD.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ONP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

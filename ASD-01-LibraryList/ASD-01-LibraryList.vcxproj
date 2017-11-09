@@ -149,6 +149,7 @@
     <ClInclude Include="Lists_tw.h" />
     <ClInclude Include="Lists_twc.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="ONP.h" />
     <ClInclude Include="PD.h" />
     <ClInclude Include="Sorting.h" />
     <ClInclude Include="TestInput.h" />

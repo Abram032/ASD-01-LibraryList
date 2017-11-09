@@ -15,6 +15,8 @@ void MainMenu()
 	printf("------------------------------------------------------\n");
 	printf("6. Binary Trees\n");
 	printf("------------------------------------------------------\n");
+	printf("90. PD.\n");
+	printf("------------------------------------------------------\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");
 }
@@ -132,8 +134,6 @@ void MainMenuPriorList()
 	printf("4. View priority list.\n");
 	printf("5. Clear priortiy list.\n");
 	printf("------------------------------------------------------\n");
-	printf("90. PD.\n");
-	printf("------------------------------------------------------\n");
 	printf("99. Go back to main menu.\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");
@@ -159,6 +159,22 @@ void MainMenuPD()
 	printf("------------------------------------------------------\n");
 	printf("1. Seek Value (TWC List).\n");
 	printf("2. Connect Lists (TWC List).\n");
+	printf("------------------------------------------------------\n");
+	printf("4. Add to list. (TWC List).\n");
+	printf("5. Add to list A. (TWC List).\n");
+	printf("6. Add to list B. (TWC List).\n");
+	printf("------------------------------------------------------\n");
+	printf("10. View list (TWC List).\n");
+	printf("11. View list A (TWC List).\n");
+	printf("12. View list B (TWC List).\n");
+	printf("------------------------------------------------------\n");
+	printf("20. Add key to ONP Stack.\n");
+	printf("21. Add key to ONP Stack Back.\n");
+	printf("22. Add operand to ONP Stack.\n");
+	printf("23. Add operand to ONP Stack Back.\n");
+	printf("24. Remove from ONP Stack.\n");
+	printf("25. View ONP Stack.\n");
+	printf("26. Execute Equation.\n");
 	printf("------------------------------------------------------\n");
 	printf("99. Go back to main menu.\n");
 	printf("0. Exit.\n");
