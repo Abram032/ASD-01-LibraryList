@@ -19,6 +19,9 @@
     <Filter Include="Header Files\Trees">
       <UniqueIdentifier>{71945d6e-6d61-404f-9e52-579750eba5f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\PD">
+      <UniqueIdentifier>{82ee0314-76c3-41bb-92e0-01caa8b407b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.c">
@@ -56,11 +59,11 @@
     <ClInclude Include="Tree_Binary.h">
       <Filter>Header Files\Trees</Filter>
     </ClInclude>
-    <ClInclude Include="PD.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ONP.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\PD</Filter>
+    </ClInclude>
+    <ClInclude Include="PD.h">
+      <Filter>Header Files\PD</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
