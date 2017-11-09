@@ -11,6 +11,7 @@
 #include "Lists_twc.h"
 #include "Lists_prior.h"
 #include "Tree_Binary.h"
+#include "PD.h"
 
 /*
 	One way list with functions.
@@ -31,6 +32,7 @@ int main()
 	TWList *tw_list_el = NULL;
 	TWList *twc_list_el = NULL;
 	PriorList *prior_list_el = NULL;
+	TWList *twc_pd = NULL;
 
 	BinTree *b_tree = NULL;
 
@@ -41,6 +43,8 @@ int main()
 	int tw_loop = 1;
 	int twc_loop = 1;
 	int prior_loop = 1;
+	
+	int pd_loop = 1;
 
 	int bintree_loop = 1;
 
@@ -468,6 +472,50 @@ int main()
 					break;
 				}
 			} while (bintree_loop == 1);
+			system("pause");
+			break;
+		case 90:
+			pd_loop = 1;
+			do
+			{
+				system("cls");
+				MainMenuPD();
+				int option_PD = ChooseOption();
+				switch (option_PD)
+				{
+				case 1:
+					x = SetValue();
+					TWList *result = PDSeekValueTWC(&twc_pd, x);
+					if (result != NULL)
+					{
+						printf("Value = %d \n", result->value);
+						printf("Address = %p \n", result);
+					}
+					else
+					{
+						printf("No value.\n");
+					}
+					system("pause");
+					break;
+				case 2:
+					PDConnectTWCLists(&)
+					system("pause");
+					break;
+				case 99:
+					pd_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					pd_loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.\n");
+					system("pause");
+					break;
+				}
+			} while (pd_loop == 1);
 			system("pause");
 			break;
 		case 0:

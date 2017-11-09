@@ -56,5 +56,8 @@
     <ClInclude Include="Tree_Binary.h">
       <Filter>Header Files\Trees</Filter>
     </ClInclude>
+    <ClInclude Include="PD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

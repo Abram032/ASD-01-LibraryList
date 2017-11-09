@@ -132,6 +132,8 @@ void MainMenuPriorList()
 	printf("4. View priority list.\n");
 	printf("5. Clear priortiy list.\n");
 	printf("------------------------------------------------------\n");
+	printf("90. PD.\n");
+	printf("------------------------------------------------------\n");
 	printf("99. Go back to main menu.\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");
@@ -144,6 +146,19 @@ void MainMenuBinaryTree()
 	printf("------------------------------------------------------\n");
 	printf("1. Add to binary tree.\n");
 	printf("2. View binary tree.\n");
+	printf("------------------------------------------------------\n");
+	printf("99. Go back to main menu.\n");
+	printf("0. Exit.\n");
+	printf("------------------------------------------------------\n");
+}
+
+void MainMenuPD()
+{
+	printf("------------------------------------------------------\n");
+	printf("----------------------/ASD Lists/---------------------\n");
+	printf("------------------------------------------------------\n");
+	printf("1. Seek Value (TWC List).\n");
+	printf("2. Connect Lists (TWC List).\n");
 	printf("------------------------------------------------------\n");
 	printf("99. Go back to main menu.\n");
 	printf("0. Exit.\n");
