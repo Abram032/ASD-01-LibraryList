@@ -460,7 +460,7 @@ int main()
 					system("pause");
 					break;
 				case 2:
-					ViewBinTree2(&b_tree);
+					//ViewBinTree(&b_tree);
 					system("pause");
 					break;
 				case 99:
