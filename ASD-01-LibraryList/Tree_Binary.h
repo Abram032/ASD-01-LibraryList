@@ -26,74 +26,6 @@ int TreeEmpty(BinTreeEl *b_tree)
 		return 1;
 	}
 }
-/*
-void ViewBinTree0(BinTreeEl *b_tree, int depth)
-{
-	if (TreeEmpty(b_tree) == 0)
-	{
-		BinTreeEl current_element = *b_tree;
-		ViewBinTree0(&(current_element)->left, depth + 1);
-		for (int i = 0; i < depth; i++)
-		{
-			putchar(' ');
-			printf("%d\n", (current_element)->value);
-			ViewBinTree0(&(current_element)->right, depth + 1);
-		}
-	}
-}
-
-void ViewBinTree(BinTreeEl *b_tree)
-{
-	if (TreeEmpty(b_tree) == 0)
-	{
-		//BinTreeEl current_element = *b_tree;
-		ViewBinTree0(b_tree, 0);
-		putchar('\n');
-	}
-}
-
-void ViewBinTree2(BinTreeEl *b_tree)
-{
-	if (TreeEmpty(b_tree) == 0)
-	{
-		BinTreeEl current_element = *b_tree;
-		ViewBinTree2(&(current_element)->left);
-		printf(" %d", current_element->value);
-		ViewBinTree2(&(current_element)->right);
-		printf(" %d", current_element->value);
-	}
-}
-
-void AddToBinTree(BinTreeEl *b_tree, int x)
-{
-	if (TreeEmpty(b_tree) == 1)
-	{
-		BinTreeEl new_element = malloc(sizeof(BinTree));
-		new_element->counter = 1;
-		new_element->value = x;
-		new_element->parent = NULL;
-		new_element->left = NULL;
-		new_element->right = NULL;
-		*b_tree = new_element;
-	}
-	else
-	{
-		BinTreeEl current_element = *b_tree;
-		if (x < (*b_tree)->value)
-		{
-			AddToBinTree(&(current_element)->left, x);
-		}
-		else if (x > (*b_tree)->value)
-		{
-			AddToBinTree(&(current_element)->right, x);
-		}
-		else
-		{
-			current_element->counter++;
-		}
-	}
-}
-*/
 
 void AddToBinTree(BinTreeEl *b_tree, int x)
 {
@@ -154,44 +86,128 @@ void AddToBinTree(BinTreeEl *b_tree, int x)
 
 void ViewTree(BinTreeEl *b_tree)
 {
-	if (TreeEmpty(b_tree) == 0)
+	if (TreeEmpty(b_tree) == 1)
 	{
-		BinTreeEl current_element = *b_tree;
-		BinTreeEl parent = current_element->parent;
-		int depth = 0;
-		while (current_element->left != NULL)
+		return;
+	}
+	BinTreeEl current_element = *b_tree;
+	BinTreeEl parent = current_element->parent;
+	int depth = 0;
+	int last = 0;
+	while (current_element->left != NULL)
+	{
+		current_element = current_element->left;
+		depth++;
+	}
+
+	while (current_element != NULL)
+	{
+		if (current_element->right != NULL && last < current_element->right->value)
 		{
+			current_element = current_element->right;
 			depth++;
-			current_element = current_element->left;
-			parent = current_element->parent;
-		}
-		while
-		{
-			if (current_element->left == NULL)
-			{
-				for (int i = 0; i <= depth; i++)
-				{
-					putchar(" ");
-				}
-				printf(" %d", current_element->value);
-				printf("\n");
-			}
-			else
+			while (current_element->left != NULL)
 			{
 				current_element = current_element->left;
-				parent = current_element->parent;
+				depth++;
 			}
+			last = current_element->value;
+		}
+		else
+		{
+			last = current_element->value;
+			current_element = current_element->parent;
+			depth--;
 		}
 	}
 }
 
-//wyswietl wartosc//
-//sprawdz prawe
-//a. jesli istnieje to minimum prawego
-//b. jesli nie to dalej do ojca
-//czy wartosc jest mniejsza od ojca
-//a. jesli sprawdz prawe
-//b. jesli nie to idz do ojca
-//sprawdz ojca
-//a. jesli istnieje idz do ojca
-//b. jesli nie to koniec
+BinTreeEl * SearchTree(BinTreeEl *b_tree, int x)
+{
+	if (TreeEmpty(b_tree) == 1)
+	{
+		return;
+	}
+	BinTreeEl current_element = *b_tree;
+	while (current_element != NULL)
+	{
+		if (x < current_element->value)
+		{
+			current_element = current_element->left;
+		}
+		else if (x > current_element->value)
+		{
+			current_element = current_element->right;
+		}
+		else
+		{
+			printf("Wartosc %d znajduje sie w drzewie.\n", x);
+			return current_element;
+		}
+	}
+	printf("Wartosc %d nie zostala znaleziona w drzewie.\n", x);
+	return NULL;
+}
+
+BinTreeEl * MinTree(BinTreeEl *b_tree)
+{
+	if (TreeEmpty(b_tree) == 1)
+	{
+		return NULL;
+	}
+	if((*b_tree)->left != NULL)
+	{
+		MinTree(&(*b_tree)->left);
+	}
+	else
+	{
+		return (*b_tree);
+	}
+}
+
+BinTreeEl * MaxTree(BinTreeEl *b_tree)
+{
+	if (TreeEmpty(b_tree) == 1)
+	{
+		return NULL;
+	}
+	if ((*b_tree)->right != NULL)
+	{
+		MaxTree(&(*b_tree)->right);
+	}
+	else
+	{
+		return (*b_tree);
+	}
+}
+
+void RemoveFromTree(BinTreeEl *b_tree, int x)
+{
+	if (TreeEmpty(b_tree) == 1)
+	{
+		return;
+	}
+	BinTreeEl remove;
+	BinTreeEl current_element;
+	current_element = SearchTree(b_tree, x);
+	if (current_element == NULL)
+	{
+		return;
+	}
+	if (current_element->counter > 1)
+	{
+		current_element->counter--;
+		return;
+	}
+
+	if (current_element->left == NULL || current_element->right == NULL)
+	{
+		remove = current_element;
+	}
+	else
+	{
+		remove = MaxTree(current_element);
+	}
+}
+//usuwanie
+//ONP zabezpieczone

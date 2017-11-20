@@ -12,7 +12,8 @@
 #include "Lists_prior.h"
 #include "Tree_Binary.h"
 #include "PD.h"
-#include "ONP.h"
+#include "ONP2.h"
+#include "TestInput_Tree.h"
 
 /*
 	One way list with functions.
@@ -40,6 +41,7 @@ int main()
 	ONPS *onp_el = NULL;
 
 	BinTree *b_tree = NULL;
+	BinTree *b_tree_re = NULL;
 
 	char operand;
 	int x, p, key;
@@ -53,6 +55,8 @@ int main()
 	int pd_loop = 1;
 
 	int bintree_loop = 1;
+
+	Input_Tree(&b_tree);
 
 	do
 	{
@@ -460,7 +464,25 @@ int main()
 					system("pause");
 					break;
 				case 2:
-					//ViewBinTree(&b_tree);
+					ViewTree(&b_tree);
+					system("pause");
+					break;
+				case 3:
+					x = SetValue();
+					b_tree_re = SearchTree(&b_tree, x);
+					system("pause");
+					break;
+				case 4:
+					b_tree_re = MinTree(&b_tree);
+					system("pause");
+					break;
+				case 5:
+					b_tree_re = MaxTree(&b_tree);
+					system("pause");
+					break;
+				case 6:
+					x = SetValue();
+					RemoveFromTree(&b_tree, x);
 					system("pause");
 					break;
 				case 99:
@@ -490,86 +512,7 @@ int main()
 				switch (option_PD)
 				{
 				case 1:
-					x = SetValue();
-					TWList *result;
-					result = PDSeekValueTWC(&twc_pd, x);
-					if (result != NULL)
-					{
-						printf("Value = %d \n", result->value);
-						printf("Address = %p \n", result);
-					}
-					else
-					{
-						printf("No value.\n");
-					}
-					system("pause");
-					break;
-				case 2:
-					PDConnectTWCLists(&twc_pd_a, &twc_pd_b);
-					system("pause");
-					break;
-				case 4:
-					x = SetValue();
-					AddToTWCList(&twc_pd, x);
-					system("pause");
-					break;
-				case 5:
-					x = SetValue();
-					AddToTWCList(&twc_pd_a, x);
-					system("pause");
-					break;
-				case 6:
-					x = SetValue();
-					AddToTWCList(&twc_pd_b, x);
-					system("pause");
-					break;
-				case 10:
-					ViewTWCList(&twc_pd);
-					system("pause");
-					break;
-				case 11:
-					ViewTWCList(&twc_pd_a);
-					system("pause");
-					break;
-				case 12:
-					ViewTWCList(&twc_pd_b);
-					system("pause");
-					break;
-				case 20:
-					key = SetKey();
-					operand = NULL;
-					AddToONPStack(&onp_el, key, operand);
-					system("pause");
-					break;
-				case 21:
-					key = SetKey();
-					operand = NULL;
-					AddToONPStackBack(&onp_el, key, operand);
-					system("pause");
-					break;
-				case 22:
-					operand = SetOperand();
-					key = NULL;
-					AddToONPStack(&onp_el, key, operand);
-					system("pause");
-					break;
-				case 23:
-					operand = SetOperand();
-					key = NULL;
-					AddToONPStackBack(&onp_el, key, operand);
-					system("pause");
-					break;
-				case 24:
-					RemoveFromONPStack(&onp_el);
-					system("pause");
-					break;
-				case 25:
-					ViewONPStack(&onp_el);
-					system("pause");
-					break;
-				case 26:
-					key = ExecuteEquation(&onp_el);
-					printf("Result: %d\n", key);
+					SetEquation();
 					system("pause");
 					break;
 				case 99:

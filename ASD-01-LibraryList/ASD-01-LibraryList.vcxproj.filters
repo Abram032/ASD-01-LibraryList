@@ -65,5 +65,11 @@
     <ClInclude Include="PD.h">
       <Filter>Header Files\PD</Filter>
     </ClInclude>
+    <ClInclude Include="TestInput_Tree.h">
+      <Filter>Header Files\Trees</Filter>
+    </ClInclude>
+    <ClInclude Include="ONP2.h">
+      <Filter>Header Files\PD</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
