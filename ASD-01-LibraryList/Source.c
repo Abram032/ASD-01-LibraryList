@@ -485,6 +485,14 @@ int main()
 					RemoveFromTree(&b_tree, x);
 					system("pause");
 					break;
+				case 7:
+					MaxDepthInTree(&b_tree);
+					system("pause");
+					break;
+				case 8:
+					CountLeaves(&b_tree);
+					system("pause");
+					break;
 				case 99:
 					bintree_loop = 0;
 					system("pause");
@@ -512,7 +520,7 @@ int main()
 				switch (option_PD)
 				{
 				case 1:
-					SetEquation();
+					//SetEquation();
 					system("pause");
 					break;
 				case 99:

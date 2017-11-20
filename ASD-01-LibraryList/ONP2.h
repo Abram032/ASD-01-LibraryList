@@ -25,7 +25,7 @@ int ONPStackEmpty(ONPel *onp_el)
 		return 1;
 	}
 }
-
+/*
 void SetEquation()
 {
 	int i = 0;
@@ -41,3 +41,4 @@ void SetEquation()
 	}
 	//return key;
 }
+*/

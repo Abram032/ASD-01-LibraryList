@@ -84,6 +84,7 @@ void AddToBinTree(BinTreeEl *b_tree, int x)
 	}
 }
 
+
 void ViewTree(BinTreeEl *b_tree)
 {
 	if (TreeEmpty(b_tree) == 1)
@@ -120,6 +121,96 @@ void ViewTree(BinTreeEl *b_tree)
 			depth--;
 		}
 	}
+}
+
+void CountLeaves(BinTreeEl *b_tree)
+{
+	if (TreeEmpty(b_tree) == 1)
+	{
+		return;
+	}
+	BinTreeEl current_element = *b_tree;
+	BinTreeEl parent = current_element->parent;
+	int depth = 0;
+	int leaves = 0;
+	int last = 0;
+	while (current_element->left != NULL)
+	{
+		current_element = current_element->left;
+		depth++;
+	}
+
+	while (current_element != NULL)
+	{
+		if (current_element->right == NULL && current_element->left == NULL)
+		{
+			leaves++;
+		}
+		if (current_element->right != NULL && last < current_element->right->value)
+		{
+			current_element = current_element->right;
+			depth++;
+			while (current_element->left != NULL)
+			{
+				current_element = current_element->left;
+				depth++;
+			}
+			last = current_element->value;
+		}
+		else
+		{
+			last = current_element->value;
+			current_element = current_element->parent;
+			depth--;
+		}
+	}
+	printf("Amount of leaves: %d\n", leaves);
+}
+
+void MaxDepthInTree(BinTreeEl *b_tree)
+{
+	if (TreeEmpty(b_tree) == 1)
+	{
+		return;
+	}
+	BinTreeEl current_element = *b_tree;
+	BinTreeEl parent = current_element->parent;
+	int depth = 0;
+	int max_depth = 0;
+	int last = 0;
+	while (current_element->left != NULL)
+	{
+		current_element = current_element->left;
+		depth++;
+	}
+
+	max_depth = depth;
+
+	while (current_element != NULL)
+	{
+		if (current_element->right != NULL && last < current_element->right->value)
+		{
+			current_element = current_element->right;
+			depth++;
+			while (current_element->left != NULL)
+			{
+				current_element = current_element->left;
+				depth++;
+			}
+			if (depth > max_depth)
+			{
+				max_depth = depth;
+			}
+			last = current_element->value;
+		}
+		else
+		{
+			last = current_element->value;
+			current_element = current_element->parent;
+			depth--;
+		}
+	}
+	printf("Max depth: %d\n", max_depth);
 }
 
 BinTreeEl * SearchTree(BinTreeEl *b_tree, int x)
@@ -187,8 +278,7 @@ void RemoveFromTree(BinTreeEl *b_tree, int x)
 	{
 		return;
 	}
-	BinTreeEl remove;
-	BinTreeEl current_element;
+	BinTreeEl parent, current_element, left_branch, right_branch, remove, max;
 	current_element = SearchTree(b_tree, x);
 	if (current_element == NULL)
 	{
@@ -199,14 +289,45 @@ void RemoveFromTree(BinTreeEl *b_tree, int x)
 		current_element->counter--;
 		return;
 	}
-
-	if (current_element->left == NULL || current_element->right == NULL)
+	
+	//Do poprawy ponizej i sprawdzic
+	if (current_element->left == NULL && current_element->right == NULL)
 	{
-		remove = current_element;
+		parent = current_element->parent;
+		if (parent->left == current_element)
+		{
+			parent->left = NULL;
+		}
+		else
+		{
+			parent->right = NULL;
+		}
+		free(current_element);
 	}
 	else
 	{
-		remove = MaxTree(current_element);
+		parent = current_element->parent;
+		if (current_element->right == NULL)
+		{
+			remove = current_element;
+			left_branch = current_element->left;
+			left_branch->parent = parent;
+			parent->left = left_branch;
+			free(remove);
+		}
+		else
+		{
+			//Do fixnienica
+			remove = current_element;
+			max = MaxTree(&current_element->right);
+			max->parent->right = NULL;
+			right_branch = current_element->right;
+			parent->left = max;
+			max->parent = parent;
+			max->right = right_branch;
+			right_branch->parent = max;
+			free(remove);
+		}
 	}
 }
 //usuwanie
