@@ -319,16 +319,34 @@ void RemoveFromTree(BinTreeEl *b_tree, int x)
 		{
 			//Do fixnienica
 			remove = current_element;
-			max = MaxTree(&current_element->right);
-			max->parent->right = NULL;
+			left_branch = current_element->left;
 			right_branch = current_element->right;
-			parent->left = max;
-			max->parent = parent;
-			max->right = right_branch;
+			if (current_element->value > left_branch)
+			{
+				max = MaxTree(&current_element->right);
+				//max->parent->right = NULL;
+				parent->left = max;
+				max->parent = parent;
+			}
+			else
+			{
+				max = MaxTree(&current_element->left);
+				//max->parent->left = NULL;
+				parent->right = max;
+				max->parent = parent;
+			}
 			right_branch->parent = max;
+			left_branch->parent = max;
+			max->right = right_branch;
+			max->left = left_branch;
 			free(remove);
 		}
 	}
 }
+//strcmp
+
+//strcpy
+
+//2x free
 //usuwanie
 //ONP zabezpieczone
