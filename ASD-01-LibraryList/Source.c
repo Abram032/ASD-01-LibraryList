@@ -14,6 +14,7 @@
 #include "PD.h"
 #include "ONP2.h"
 #include "TestInput_Tree.h"
+#include "Sort.h"
 
 /*
 	One way list with functions.
@@ -57,6 +58,9 @@ int main()
 	int pd_loop = 1;
 
 	int bintree_loop = 1;
+
+	int sort_loop = 1;
+	int *A;
 
 	Input_Tree(&b_tree);
 	Input_Tree2(&b_tree_a);
@@ -531,6 +535,43 @@ int main()
 					break;
 				}
 			} while (bintree_loop == 1);
+			system("pause");
+			break;
+		case 7:
+			sort_loop = 1;
+			do
+			{
+				system("cls");
+				MainMenuSorting();
+				int sort_option = ChooseOption();
+				switch (sort_option)
+				{
+				case 1:
+					system("pause");
+					break;
+				case 2:
+					system("pause");
+					break;
+				case 3:
+					system("pause");
+					break;
+				case 4:
+					system("pause");
+					break;
+				case 5:
+					system("pause");
+					break;
+				case 10:
+					x = SetValue();
+					A = Generate(x);
+					system("pause");
+					break;
+				case 11:
+					PrintArray(A);
+					system("pause");
+					break;
+				}
+			} while (sort_loop == 1);
 			system("pause");
 			break;
 		case 90:

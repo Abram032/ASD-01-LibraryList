@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="Functions.h" />
     <ClInclude Include="ONP2.h" />
+    <ClInclude Include="Sort.h" />
     <ClInclude Include="TestInput_Tree.h" />
     <ClInclude Include="Lists.h" />
     <ClInclude Include="Lists_c.h" />

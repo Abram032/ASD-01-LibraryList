@@ -22,6 +22,9 @@
     <Filter Include="Header Files\PD">
       <UniqueIdentifier>{82ee0314-76c3-41bb-92e0-01caa8b407b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Sorting">
+      <UniqueIdentifier>{c27746f4-a109-405c-8796-1873c4f01f44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.c">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="ONP2.h">
       <Filter>Header Files\PD</Filter>
+    </ClInclude>
+    <ClInclude Include="Sort.h">
+      <Filter>Header Files\Sorting</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
