@@ -84,64 +84,6 @@ void AddToBinTree(BinTreeEl *b_tree, int x)
 	}
 }
 
-BinTreeEl * GetNext(BinTreeEl *b_tree)
-{
-	if (TreeEmpty(b_tree) == 1)
-	{
-		return NULL;
-	}
-	if ((*b_tree)->right != NULL)
-	{
-		return MinTree(&(*b_tree)->right);
-	}
-	BinTreeEl last = *b_tree;
-	do
-	{
-		last = b_tree;
-		b_tree = (*b_tree)->parent;
-	} while ((*b_tree) != NULL && (*b_tree)->right == last);
-	return b_tree;
-}
-
-/*
-void ViewTree(BinTreeEl *b_tree)
-{
-	if (TreeEmpty(b_tree) == 1)
-	{
-		return;
-	}
-	BinTreeEl current_element = *b_tree;
-	BinTreeEl parent = current_element->parent;
-	int depth = 0;
-	int last = 0;
-	while (current_element->left != NULL)
-	{
-		current_element = current_element->left;
-		depth++;
-	}
-
-	while (current_element != NULL)
-	{
-		if (current_element->right != NULL && last < current_element->right->value)
-		{
-			current_element = current_element->right;
-			depth++;
-			while (current_element->left != NULL)
-			{
-				current_element = current_element->left;
-				depth++;
-			}
-			last = current_element->value;
-		}
-		else
-		{
-			last = current_element->value;
-			current_element = current_element->parent;
-			depth--;
-		}
-	}
-}
-*/
 int CountLeaves(BinTreeEl *b_tree)
 {
 	if (TreeEmpty(b_tree) == 1)
@@ -164,18 +106,23 @@ int MaxDepth(BinTreeEl *b_tree)
 	{
 		return NULL;
 	}
-	int depth_left, depth_right, depth;
-	depth_left = MaxDepth(&(*b_tree)->left);
-	depth_right = MaxDepth(&(*b_tree)->right);
-	if (depth_left > depth_right)
-	{
-		depth = depth_left;
-	}
 	else
 	{
-		depth = depth_right;
+		int depth_left = 0;
+		int depth_right = 0;
+		int depth;
+		depth_left = depth_left + MaxDepth(&(*b_tree)->left);
+		depth_right = depth_right + MaxDepth(&(*b_tree)->right);
+		if (depth_left > depth_right)
+		{
+			depth = depth_left;
+		}
+		else
+		{
+			depth = depth_right;
+		}
+		return depth++;
 	}
-	return depth++;
 }
 /*
 void MaxDepthInTree(BinTreeEl *b_tree)
@@ -257,7 +204,7 @@ BinTreeEl * MinTree(BinTreeEl *b_tree)
 	{
 		return NULL;
 	}
-	if((*b_tree)->left != NULL)
+	if ((*b_tree)->left != NULL)
 	{
 		MinTree(&(*b_tree)->left);
 	}
@@ -300,7 +247,7 @@ void RemoveFromTree(BinTreeEl *b_tree, int x)
 		current_element->counter--;
 		return;
 	}
-	
+
 	//Do poprawy ponizej i sprawdzic
 	if (current_element->left == NULL && current_element->right == NULL)
 	{
@@ -354,6 +301,64 @@ void RemoveFromTree(BinTreeEl *b_tree, int x)
 		}
 	}
 }
+
+BinTreeEl * GetNext(BinTreeEl *b_tree)
+{
+	if (TreeEmpty(b_tree) == 1)
+	{
+		return NULL;
+	}
+	if ((*b_tree)->right != NULL)
+	{
+		return MinTree(&(*b_tree)->right);
+	}
+	BinTreeEl last = *b_tree;
+	do
+	{
+		last = b_tree;
+		b_tree = (*b_tree)->parent;
+	} while ((*b_tree) != NULL && (*b_tree)->right == last);
+	return b_tree;
+}
+
+BinTreeEl * GetLast(BinTreeEl *b_tree)
+{
+	if (TreeEmpty(b_tree) == 1)
+	{
+		return NULL;
+	}
+	if ((*b_tree)->left != NULL)
+	{
+		return MaxTree(&(*b_tree)->left);
+	}
+	BinTreeEl last = *b_tree;
+	do
+	{
+		last = b_tree;
+		b_tree = (*b_tree)->parent;
+	} while ((*b_tree) != NULL && (*b_tree)->left == last);
+	return b_tree;
+}
+
+void ViewTree0(BinTreeEl *b_tree, int depth)
+{
+	if (TreeEmpty(b_tree) == 1)
+	{
+		return;
+	}
+	ViewTree0(&(*b_tree)->left, depth++);
+	for (int i = 0; i < depth; i++) 
+	{
+		putchar(' ');
+	}
+	printf("%d\n", (*b_tree)->value);
+	ViewTree0(&(*b_tree)->right, depth++);
+}
+void ViewTree(BinTreeEl *b_tree)
+{
+	ViewTree0(&(*b_tree), 0);
+	putchar('\n');
+}
 //strcmp
 
 //strcpy

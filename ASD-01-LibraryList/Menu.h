@@ -154,6 +154,9 @@ void MainMenuBinaryTree()
 	printf("7. Max depth of binary tree.\n");
 	printf("8. Count leaves of binary tree.\n");
 	printf("------------------------------------------------------\n");
+	printf("11. Find next.\n");
+	printf("12. Find last.\n");
+	printf("------------------------------------------------------\n");
 	printf("99. Go back to main menu.\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");

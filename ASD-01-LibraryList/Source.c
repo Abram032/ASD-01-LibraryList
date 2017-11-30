@@ -495,6 +495,14 @@ int main()
 					printf("Amount of leaves: %d\n", x);
 					system("pause");
 					break;
+				case 11:
+					b_tree_re = GetNext(&b_tree);
+					system("pause");
+					break;
+				case 12:
+					b_tree_re = GetLast(&b_tree);
+					system("pause");
+					break;
 				case 99:
 					bintree_loop = 0;
 					system("pause");
