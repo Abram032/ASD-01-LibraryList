@@ -42,6 +42,7 @@ int main()
 
 	BinTree *b_tree = NULL;
 	BinTree *b_tree_re = NULL;
+	char buffer[2048];
 
 	char operand;
 	int x, p, key;
@@ -459,8 +460,10 @@ int main()
 				switch (option_bintree)
 				{
 				case 1:
-					x = SetValue();
-					AddToBinTree(&b_tree, x);
+					printf("Put data: ");
+					scanf("%s", buffer);
+					AddToBinTree(&b_tree, buffer);
+					memset(buffer, 0, sizeof buffer);
 					system("pause");
 					break;
 				case 2:
@@ -468,8 +471,10 @@ int main()
 					system("pause");
 					break;
 				case 3:
-					x = SetValue();
-					b_tree_re = SearchTree(&b_tree, x);
+					printf("Put data: ");
+					scanf("%s", buffer);
+					b_tree_re = SearchTree(&b_tree, buffer);
+					memset(buffer, 0, sizeof buffer);
 					system("pause");
 					break;
 				case 4:
@@ -481,12 +486,14 @@ int main()
 					system("pause");
 					break;
 				case 6:
-					x = SetValue();
-					RemoveFromTree(&b_tree, x);
+					printf("Put data: ");
+					scanf("%s", buffer);
+					RemoveFromTree(&b_tree, buffer);
+					memset(buffer, 0, sizeof buffer);
 					system("pause");
 					break;
 				case 7:
-					x = MaxDepth(&b_tree);
+					x = MaxDepth(b_tree);
 					printf("Max depth in tree: %d\n", x);
 					system("pause");
 					break;
