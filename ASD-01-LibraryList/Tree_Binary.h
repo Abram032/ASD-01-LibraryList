@@ -28,8 +28,7 @@ int TreeEmpty(BinTreeEl *b_tree)
 	}
 }
 
-void AddToBinTree(BinTreeEl *b_tree, char *buffer)
-
+void AddToBinTree(BinTreeEl *b_tree, BinTreeEl *parent, char *buffer)
 {
 	char * data = malloc(strlen(buffer) + 1);
 	strcpy(data, buffer);
@@ -38,6 +37,7 @@ void AddToBinTree(BinTreeEl *b_tree, char *buffer)
 		*b_tree = malloc(sizeof(BinTree));
 		(*b_tree)->left = NULL;
 		(*b_tree)->right = NULL;
+		(*b_tree)->parent = *parent;
 		(*b_tree)->data = data;
 		(*b_tree)->counter = 1;
 	}
@@ -46,11 +46,11 @@ void AddToBinTree(BinTreeEl *b_tree, char *buffer)
 		int c = strcmp(data, (*b_tree)->data);
 		if (c < 0)
 		{
-			AddToBinTree(&(*b_tree)->left, data);
+			AddToBinTree(&(*b_tree)->left, &(*b_tree), data);
 		}
 		else if (c > 0)
 		{
-			AddToBinTree(&(*b_tree)->right, data);
+			AddToBinTree(&(*b_tree)->right, &(*b_tree), data);
 		}
 		else
 		{
@@ -327,22 +327,22 @@ void RemoveFromTree(BinTreeEl *b_tree, char *buffer)
 	free(rm);
 }
 
-BinTreeEl * GetNext(BinTreeEl *b_tree)
+BinTreeEl * GetNext(BinTreeEl b_tree)
 {
 	if (TreeEmpty(b_tree) == 1)
 	{
 		return NULL;
 	}
-	if ((*b_tree)->right != NULL)
+	if ((b_tree)->right != NULL)
 	{
-		return MinTree(&(*b_tree)->right);
+		return MinTree(&(b_tree)->right);
 	}
-	BinTreeEl last = *b_tree;
+	BinTreeEl last = b_tree;
 	do
 	{
-		last = b_tree;
-		b_tree = (*b_tree)->parent;
-	} while ((*b_tree) != NULL && (*b_tree)->right == last);
+		last = (b_tree);
+		b_tree = (b_tree)->parent;
+	} while ((b_tree) != NULL && (b_tree)->right == last);
 	return b_tree;
 }
 
@@ -359,10 +359,10 @@ BinTreeEl * GetLast(BinTreeEl *b_tree)
 	BinTreeEl last = *b_tree;
 	do
 	{
-		last = b_tree;
+		last = (*b_tree);
 		b_tree = (*b_tree)->parent;
 	} while ((*b_tree) != NULL && (*b_tree)->left == last);
-	return b_tree;
+	return &b_tree;
 }
 
 void ViewTree0(BinTreeEl *b_tree, int depth)
@@ -379,8 +379,35 @@ void ViewTree0(BinTreeEl *b_tree, int depth)
 	printf("%s\n", (*b_tree)->data);
 	ViewTree0(&(*b_tree)->right, depth++);
 }
+
 void ViewTree(BinTreeEl *b_tree)
 {
 	ViewTree0(&(*b_tree), 0);
 	putchar('\n');
+}
+
+void CompareTrees(BinTreeEl b_tree, BinTreeEl b_tree_a)
+{
+	if (b_tree == NULL)
+	{
+		return;
+	}
+	b_tree = MinTree(&b_tree);
+	b_tree_a = MinTree(&b_tree_a);
+
+	while (b_tree != NULL || b_tree_a != NULL)
+	{
+		if ((b_tree != NULL && b_tree_a != NULL) && (strcmp(b_tree->data, b_tree_a->data) == 0))
+		{
+			b_tree = GetNext(b_tree);
+			b_tree_a = GetNext(b_tree_a);
+		}
+		else
+		{
+			printf("Data in trees is not the same.\n");
+			return;
+		}
+	}
+	printf("Data in trees is the same.\n");
+	return;
 }

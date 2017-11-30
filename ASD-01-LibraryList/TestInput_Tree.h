@@ -4,28 +4,56 @@
 #include <malloc.h>
 #include "Tree_Binary.h"
 
+BinTreeEl *nul = NULL;
+
 void Input_Tree(BinTreeEl *b_tree)
 {
-	AddToBinTree(b_tree, "15");
-	AddToBinTree(b_tree, "10");
-	AddToBinTree(b_tree, "20");
-	AddToBinTree(b_tree, "25");
-	AddToBinTree(b_tree, "30");
-	AddToBinTree(b_tree, "22");
-	AddToBinTree(b_tree, "24");
-	AddToBinTree(b_tree, "28");
-	AddToBinTree(b_tree, "18");
-	AddToBinTree(b_tree, "16");
-	AddToBinTree(b_tree, "12");
-	AddToBinTree(b_tree, "14");
-	AddToBinTree(b_tree, "9");
-	AddToBinTree(b_tree, "7");
-	AddToBinTree(b_tree, "5");
-	AddToBinTree(b_tree, "8");
-	AddToBinTree(b_tree, "4");
-	AddToBinTree(b_tree, "2");
-	AddToBinTree(b_tree, "1");
-	AddToBinTree(b_tree, "29");
-	AddToBinTree(b_tree, "32");
-	AddToBinTree(b_tree, "11");
+	AddToBinTree(b_tree, &nul, "r");
+	AddToBinTree(b_tree, &nul, "a");
+	AddToBinTree(b_tree, &nul, "b");
+	AddToBinTree(b_tree, &nul, "g");
+	AddToBinTree(b_tree, &nul, "h");
+	AddToBinTree(b_tree, &nul, "q");
+	AddToBinTree(b_tree, &nul, "k");
+	AddToBinTree(b_tree, &nul, "s");
+	AddToBinTree(b_tree, &nul, "o");
+	AddToBinTree(b_tree, &nul, "c");
+	AddToBinTree(b_tree, &nul, "d");
+	AddToBinTree(b_tree, &nul, "f");
+	AddToBinTree(b_tree, &nul, "e");
+	AddToBinTree(b_tree, &nul, "i");
+	AddToBinTree(b_tree, &nul, "l");
+	AddToBinTree(b_tree, &nul, "j");
+	AddToBinTree(b_tree, &nul, "m");
+	AddToBinTree(b_tree, &nul, "o");
+	AddToBinTree(b_tree, &nul, "n");
+	AddToBinTree(b_tree, &nul, "p");
+	AddToBinTree(b_tree, &nul, "t");
+	AddToBinTree(b_tree, &nul, "u");
+}
+
+void Input_Tree2(BinTreeEl *b_tree)
+{
+	AddToBinTree(b_tree, &nul, "r");
+	AddToBinTree(b_tree, &nul, "a");
+	AddToBinTree(b_tree, &nul, "b");
+	AddToBinTree(b_tree, &nul, "g");
+	//AddToBinTree(b_tree, &nul, "h");
+	AddToBinTree(b_tree, &nul, "q");
+	AddToBinTree(b_tree, &nul, "k");
+	AddToBinTree(b_tree, &nul, "s");
+	AddToBinTree(b_tree, &nul, "o");
+	AddToBinTree(b_tree, &nul, "c");
+	AddToBinTree(b_tree, &nul, "d");
+	AddToBinTree(b_tree, &nul, "f");
+	AddToBinTree(b_tree, &nul, "e");
+	AddToBinTree(b_tree, &nul, "i");
+	AddToBinTree(b_tree, &nul, "l");
+	AddToBinTree(b_tree, &nul, "j");
+	AddToBinTree(b_tree, &nul, "m");
+	AddToBinTree(b_tree, &nul, "o");
+	AddToBinTree(b_tree, &nul, "n");
+	AddToBinTree(b_tree, &nul, "p");
+	AddToBinTree(b_tree, &nul, "t");
+	AddToBinTree(b_tree, &nul, "u");
 }

@@ -41,6 +41,7 @@ int main()
 	ONPS *onp_el = NULL;
 
 	BinTree *b_tree = NULL;
+	BinTree *b_tree_a = NULL;
 	BinTree *b_tree_re = NULL;
 	char buffer[2048];
 
@@ -58,7 +59,8 @@ int main()
 	int bintree_loop = 1;
 
 	Input_Tree(&b_tree);
-
+	Input_Tree2(&b_tree_a);
+	
 	do
 	{
 		system("cls");
@@ -462,7 +464,7 @@ int main()
 				case 1:
 					printf("Put data: ");
 					scanf("%s", buffer);
-					AddToBinTree(&b_tree, buffer);
+					AddToBinTree(&b_tree, NULL, buffer);
 					memset(buffer, 0, sizeof buffer);
 					system("pause");
 					break;
@@ -508,6 +510,10 @@ int main()
 					break;
 				case 12:
 					b_tree_re = GetLast(&b_tree);
+					system("pause");
+					break;
+				case 20:
+					CompareTrees(b_tree, b_tree_a);
 					system("pause");
 					break;
 				case 99:
