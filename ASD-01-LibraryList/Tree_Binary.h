@@ -84,7 +84,26 @@ void AddToBinTree(BinTreeEl *b_tree, int x)
 	}
 }
 
+BinTreeEl * GetNext(BinTreeEl *b_tree)
+{
+	if (TreeEmpty(b_tree) == 1)
+	{
+		return NULL;
+	}
+	if ((*b_tree)->right != NULL)
+	{
+		return MinTree(&(*b_tree)->right);
+	}
+	BinTreeEl last = *b_tree;
+	do
+	{
+		last = b_tree;
+		b_tree = (*b_tree)->parent;
+	} while ((*b_tree) != NULL && (*b_tree)->right == last);
+	return b_tree;
+}
 
+/*
 void ViewTree(BinTreeEl *b_tree)
 {
 	if (TreeEmpty(b_tree) == 1)
@@ -122,51 +141,43 @@ void ViewTree(BinTreeEl *b_tree)
 		}
 	}
 }
-
-void CountLeaves(BinTreeEl *b_tree)
+*/
+int CountLeaves(BinTreeEl *b_tree)
 {
 	if (TreeEmpty(b_tree) == 1)
 	{
-		return;
+		return 0;
 	}
-	BinTreeEl current_element = *b_tree;
-	BinTreeEl parent = current_element->parent;
-	int depth = 0;
-	int leaves = 0;
-	int last = 0;
-	while (current_element->left != NULL)
+	if ((*b_tree)->left == NULL && (*b_tree)->right == NULL)
 	{
-		current_element = current_element->left;
-		depth++;
+		return 1;
 	}
-
-	while (current_element != NULL)
+	else
 	{
-		if (current_element->right == NULL && current_element->left == NULL)
-		{
-			leaves++;
-		}
-		if (current_element->right != NULL && last < current_element->right->value)
-		{
-			current_element = current_element->right;
-			depth++;
-			while (current_element->left != NULL)
-			{
-				current_element = current_element->left;
-				depth++;
-			}
-			last = current_element->value;
-		}
-		else
-		{
-			last = current_element->value;
-			current_element = current_element->parent;
-			depth--;
-		}
+		return CountLeaves(&(*b_tree)->right) + CountLeaves(&(*b_tree)->left);
 	}
-	printf("Amount of leaves: %d\n", leaves);
 }
 
+int MaxDepth(BinTreeEl *b_tree)
+{
+	if (TreeEmpty(b_tree) == 1)
+	{
+		return NULL;
+	}
+	int depth_left, depth_right, depth;
+	depth_left = MaxDepth(&(*b_tree)->left);
+	depth_right = MaxDepth(&(*b_tree)->right);
+	if (depth_left > depth_right)
+	{
+		depth = depth_left;
+	}
+	else
+	{
+		depth = depth_right;
+	}
+	return depth++;
+}
+/*
 void MaxDepthInTree(BinTreeEl *b_tree)
 {
 	if (TreeEmpty(b_tree) == 1)
@@ -211,7 +222,7 @@ void MaxDepthInTree(BinTreeEl *b_tree)
 		}
 	}
 	printf("Max depth: %d\n", max_depth);
-}
+}*/
 
 BinTreeEl * SearchTree(BinTreeEl *b_tree, int x)
 {

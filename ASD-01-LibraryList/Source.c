@@ -486,11 +486,13 @@ int main()
 					system("pause");
 					break;
 				case 7:
-					MaxDepthInTree(&b_tree);
+					x = MaxDepth(&b_tree);
+					printf("Max depth in tree: %d\n", x);
 					system("pause");
 					break;
 				case 8:
-					CountLeaves(&b_tree);
+					x = CountLeaves(&b_tree);
+					printf("Amount of leaves: %d\n", x);
 					system("pause");
 					break;
 				case 99:
