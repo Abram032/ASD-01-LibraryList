@@ -60,7 +60,7 @@ int main()
 	int bintree_loop = 1;
 
 	int sort_loop = 1;
-	int *A;
+	int *A, *A1;
 
 	Input_Tree(&b_tree);
 	Input_Tree2(&b_tree_a);
@@ -547,15 +547,29 @@ int main()
 				switch (sort_option)
 				{
 				case 1:
+					x = SetValue();
+					A = Generate(x);
+					BubbleSort(A, x);
+					PrintArray(A, x);
 					system("pause");
 					break;
 				case 2:
+					x = SetValue();
+					A = Generate(x);
+					InsertionSort(A, x);
+					PrintArray(A, x);
 					system("pause");
 					break;
 				case 3:
 					system("pause");
 					break;
 				case 4:
+					x = SetValue();
+					A = Generate(x);
+					int *a = CopyArray(A, x);
+					QuickSort(a, 0, x - 1);
+					PrintArray(A, x);
+					PrintArray(a, x);
 					system("pause");
 					break;
 				case 5:
@@ -567,7 +581,20 @@ int main()
 					system("pause");
 					break;
 				case 11:
-					PrintArray(A);
+					PrintArray(A, x);
+					system("pause");
+					break;
+				case 99:
+					sort_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					sort_loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.\n");
 					system("pause");
 					break;
 				}
