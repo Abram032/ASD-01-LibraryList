@@ -10,13 +10,16 @@
 #include "Lists_tw.h"
 #include "Lists_twc.h"
 #include "Lists_prior.h"
+#include "Tree_Binary.h"
+#include "PD.h"
+#include "ONP2.h"
+#include "TestInput_Tree.h"
+#include "Sort.h"
 
 /*
 	One way list with functions.
 
 	TODO:
-	- Flip List recursive.
-	- Check sorting algorithms.
 	- ADD COMMENTS !!!
 */
 
@@ -31,15 +34,38 @@ int main()
 	List *list_bw = NULL;
 	TWList *tw_list_el = NULL;
 	TWList *twc_list_el = NULL;
-	PriorListEl *prior_list_el = NULL;
+	PriorList *prior_list_el = NULL;
 
-	int x, p;
+	TWList *twc_pd = NULL;
+	TWList *twc_pd_a = NULL;
+	TWList *twc_pd_b = NULL;
+	ONPS *onp_el = NULL;
+
+	BinTree *b_tree = NULL;
+	BinTree *b_tree_a = NULL;
+	BinTree *b_tree_re = NULL;
+	char buffer[2048];
+
+	char operand;
+	int x, p, key;
 	int loop = 1;
 	int ow_loop = 1;
 	int owc_loop = 1;
 	int tw_loop = 1;
 	int twc_loop = 1;
 	int prior_loop = 1;
+	
+	int pd_loop = 1;
+
+	int bintree_loop = 1;
+
+	int sort_loop = 1;
+	int *A, *a, *b;
+	float *AF;
+
+	Input_Tree(&b_tree);
+	Input_Tree2(&b_tree_a);
+	
 	do
 	{
 		system("cls");
@@ -429,6 +455,204 @@ int main()
 					break;
 				}
 			} while (prior_loop == 1);
+			system("pause");
+			break;
+		case 6:
+			bintree_loop = 1;
+			do
+			{
+				system("cls");
+				MainMenuBinaryTree();
+				int option_bintree = ChooseOption();
+				switch (option_bintree)
+				{
+				case 1:
+					printf("Put data: ");
+					scanf("%s", buffer);
+					AddToBinTree(&b_tree, NULL, buffer);
+					memset(buffer, 0, sizeof buffer);
+					system("pause");
+					break;
+				case 2:
+					ViewTree(&b_tree);
+					system("pause");
+					break;
+				case 3:
+					printf("Put data: ");
+					scanf("%s", buffer);
+					b_tree_re = SearchTree(&b_tree, buffer);
+					memset(buffer, 0, sizeof buffer);
+					system("pause");
+					break;
+				case 4:
+					b_tree_re = MinTree(&b_tree);
+					system("pause");
+					break;
+				case 5:
+					b_tree_re = MaxTree(&b_tree);
+					system("pause");
+					break;
+				case 6:
+					printf("Put data: ");
+					scanf("%s", buffer);
+					RemoveFromTree(&b_tree, buffer);
+					memset(buffer, 0, sizeof buffer);
+					system("pause");
+					break;
+				case 7:
+					x = MaxDepth(b_tree);
+					printf("Max depth in tree: %d\n", x);
+					system("pause");
+					break;
+				case 8:
+					x = CountLeaves(&b_tree);
+					printf("Amount of leaves: %d\n", x);
+					system("pause");
+					break;
+				case 11:
+					b_tree_re = GetNext(&b_tree);
+					system("pause");
+					break;
+				case 12:
+					b_tree_re = GetLast(&b_tree);
+					system("pause");
+					break;
+				case 20:
+					CompareTrees(b_tree, b_tree_a);
+					system("pause");
+					break;
+				case 99:
+					bintree_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					bintree_loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.\n");
+					system("pause");
+					break;
+				}
+			} while (bintree_loop == 1);
+			system("pause");
+			break;
+		case 7:
+			sort_loop = 1;
+			do
+			{
+				system("cls");
+				MainMenuSorting();
+				int sort_option = ChooseOption();
+				switch (sort_option)
+				{
+				case 1:
+					x = SetValue();
+					A = Generate(x);
+					BubbleSort(A, x);
+					PrintArray(A, x);
+					system("pause");
+					break;
+				case 2:
+					x = SetValue();
+					A = Generate(x);
+					InsertionSort(A, x);
+					PrintArray(A, x);
+					system("pause");
+					break;
+				case 3:
+					x = SetValue();
+					A = Generate(x);
+					ShellSort(A, x);
+					PrintArray(A, x);
+					system("pause");
+					break;
+				case 4:
+					x = SetValue();
+					A = Generate(x);
+					a = CopyArray(A, x);
+					QuickSort(a, 0, x - 1);
+					PrintArray(A, x);
+					PrintArray(a, x);
+					system("pause");
+					break;
+				case 5:
+					x = SetValue();
+					A = Generate(x);
+					a = CopyArray(A, x);
+					QSort(a, 0, x - 1);
+					PrintArray(A, x);
+					PrintArray(a, x);
+					system("pause");
+					break;
+				case 6:
+					x = SetValue();
+					A = Generate(x);
+					printf("Bubble Sort:\n");
+					BubbleSort(A, x);
+					printf("Insertion Sort:\n");
+					InsertionSort(A, x);
+					printf("Shell Sort:\n");
+					ShellSort(A, x);
+					printf("Quick Sort:\n");
+					QuickSortStart(A, x);
+					//printf("Quick Sort (ASD):\n");
+					//QSortStart(A, x);
+					system("pause");
+					break;
+				case 10:
+					x = SetValue();
+					AF = GenerateFloat(x);
+					HeapSort(AF, x);
+					PrintArrayFloat(AF, x);
+					system("pause");
+					break;
+				case 99:
+					sort_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					sort_loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.\n");
+					system("pause");
+					break;
+				}
+			} while (sort_loop == 1);
+			system("pause");
+			break;
+		case 90:
+			pd_loop = 1;
+			do
+			{
+				system("cls");
+				MainMenuPD();
+				int option_PD = ChooseOption();
+				switch (option_PD)
+				{
+				case 1:
+					//SetEquation();
+					system("pause");
+					break;
+				case 99:
+					pd_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					pd_loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.\n");
+					system("pause");
+					break;
+				}
+			} while (pd_loop == 1);
 			system("pause");
 			break;
 		case 0:

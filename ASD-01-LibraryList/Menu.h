@@ -13,6 +13,12 @@ void MainMenu()
 	printf("4. One Way Cyclic\n");
 	printf("5. Priority Lists\n");
 	printf("------------------------------------------------------\n");
+	printf("6. Binary Trees\n");
+	printf("------------------------------------------------------\n");
+	printf("7. Sorting\n");
+	printf("------------------------------------------------------\n");
+	printf("90. PD.\n");
+	printf("------------------------------------------------------\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");
 }
@@ -129,6 +135,62 @@ void MainMenuPriorList()
 	printf("3. Change priority of element.\n");
 	printf("4. View priority list.\n");
 	printf("5. Clear priortiy list.\n");
+	printf("------------------------------------------------------\n");
+	printf("99. Go back to main menu.\n");
+	printf("0. Exit.\n");
+	printf("------------------------------------------------------\n");
+}
+
+void MainMenuBinaryTree()
+{
+	printf("------------------------------------------------------\n");
+	printf("----------------------/ASD Lists/---------------------\n");
+	printf("------------------------------------------------------\n");
+	printf("1. Add to binary tree.\n");
+	printf("2. View binary tree.\n");
+	printf("3. Search binary tree.\n");
+	printf("4. Minmum in binary tree.\n");
+	printf("5. Maximum in binary tree.\n");
+	printf("6. Remove from binary tree.\n");
+	printf("------------------------------------------------------\n");
+	printf("7. Max depth of binary tree.\n");
+	printf("8. Count leaves of binary tree.\n");
+	printf("------------------------------------------------------\n");
+	printf("11. Find next.\n");
+	printf("12. Find last.\n");
+	printf("------------------------------------------------------\n");
+	printf("20. Compare Trees.\n");
+	printf("------------------------------------------------------\n");
+	printf("99. Go back to main menu.\n");
+	printf("0. Exit.\n");
+	printf("------------------------------------------------------\n");
+}
+
+void MainMenuPD()
+{
+	printf("------------------------------------------------------\n");
+	printf("----------------------/ASD Lists/---------------------\n");
+	printf("------------------------------------------------------\n");
+	printf("1. Add Equation.\n");
+	printf("------------------------------------------------------\n");
+	printf("99. Go back to main menu.\n");
+	printf("0. Exit.\n");
+	printf("------------------------------------------------------\n");
+}
+
+void MainMenuSorting()
+{
+	printf("------------------------------------------------------\n");
+	printf("----------------------/ASD Lists/---------------------\n");
+	printf("------------------------------------------------------\n");
+	printf("1. Bubble Sort.\n");
+	printf("2. Insertion Sort.\n");
+	printf("3. Shell Sort.\n");
+	printf("4. Quick Sort.\n");
+	printf("5. Quick Sort. (ASD)\n");
+	printf("6. Run All.\n");
+	printf("------------------------------------------------------\n");
+	printf("10. Heap Sort.\n");
 	printf("------------------------------------------------------\n");
 	printf("99. Go back to main menu.\n");
 	printf("0. Exit.\n");

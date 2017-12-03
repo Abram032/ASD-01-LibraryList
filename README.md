@@ -18,15 +18,15 @@ Assigment Checklist:
 10. DONE (Optional)
 11. DONE (Optional)
 12. DONE
-13. Not Started
+13. DONE
 14. Not Started (Optional)
-15. Not Started
+15. DONE
 16. Not Started (Optional)
 17. Not Started (Optional)
 18. Not Started (Optional)
 19. Not Started (Optional)
-20. Not Started
-21. Not Started
+20. DONE
+21. DONE
 22. Not Started (Optional)
 23. Not Started (Optional)
 24. Not Started
