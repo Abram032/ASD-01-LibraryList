@@ -60,7 +60,8 @@ int main()
 	int bintree_loop = 1;
 
 	int sort_loop = 1;
-	int *A, *A1;
+	int *A, *a, *b;
+	float *AF;
 
 	Input_Tree(&b_tree);
 	Input_Tree2(&b_tree_a);
@@ -561,27 +562,50 @@ int main()
 					system("pause");
 					break;
 				case 3:
+					x = SetValue();
+					A = Generate(x);
+					ShellSort(A, x);
+					PrintArray(A, x);
 					system("pause");
 					break;
 				case 4:
 					x = SetValue();
 					A = Generate(x);
-					int *a = CopyArray(A, x);
+					a = CopyArray(A, x);
 					QuickSort(a, 0, x - 1);
 					PrintArray(A, x);
 					PrintArray(a, x);
 					system("pause");
 					break;
 				case 5:
+					x = SetValue();
+					A = Generate(x);
+					a = CopyArray(A, x);
+					QSort(a, 0, x - 1);
+					PrintArray(A, x);
+					PrintArray(a, x);
+					system("pause");
+					break;
+				case 6:
+					x = SetValue();
+					A = Generate(x);
+					printf("Bubble Sort:\n");
+					BubbleSort(A, x);
+					printf("Insertion Sort:\n");
+					InsertionSort(A, x);
+					printf("Shell Sort:\n");
+					ShellSort(A, x);
+					printf("Quick Sort:\n");
+					QuickSortStart(A, x);
+					//printf("Quick Sort (ASD):\n");
+					//QSortStart(A, x);
 					system("pause");
 					break;
 				case 10:
 					x = SetValue();
-					A = Generate(x);
-					system("pause");
-					break;
-				case 11:
-					PrintArray(A, x);
+					AF = GenerateFloat(x);
+					HeapSort(AF, x);
+					PrintArrayFloat(AF, x);
 					system("pause");
 					break;
 				case 99:

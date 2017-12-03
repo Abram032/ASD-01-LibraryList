@@ -186,11 +186,11 @@ void MainMenuSorting()
 	printf("1. Bubble Sort.\n");
 	printf("2. Insertion Sort.\n");
 	printf("3. Shell Sort.\n");
-	printf("4. Quick Sort.\n"); 
-	printf("5. Run All.\n");
+	printf("4. Quick Sort.\n");
+	printf("5. Quick Sort. (ASD)\n");
+	printf("6. Run All.\n");
 	printf("------------------------------------------------------\n");
-	printf("10. Generate.\n");
-	printf("11. Print Array.\n");
+	printf("10. Heap Sort.\n");
 	printf("------------------------------------------------------\n");
 	printf("99. Go back to main menu.\n");
 	printf("0. Exit.\n");
