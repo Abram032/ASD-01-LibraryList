@@ -411,3 +411,17 @@ void CompareTrees(BinTreeEl b_tree, BinTreeEl b_tree_a)
 	printf("Data in trees is the same.\n");
 	return;
 }
+
+void TreeSymmetry(BinTreeEl a_tree, BinTreeEl b_tree)
+{
+	if (a_tree->data != b_tree)
+	{
+		printf("Tree does not have symmetry!");
+		return;
+	}
+	else
+	{
+		TreeSymmetry(a_tree->left, b_tree->right);
+		TreeSymmetry(a_tree->right, b_tree->left);
+	}
+}
