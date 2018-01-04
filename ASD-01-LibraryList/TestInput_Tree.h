@@ -38,7 +38,7 @@ void Input_Tree2(BinTreeEl *b_tree)
 	AddToBinTree(b_tree, &nul, "a");
 	AddToBinTree(b_tree, &nul, "b");
 	AddToBinTree(b_tree, &nul, "g");
-	//AddToBinTree(b_tree, &nul, "h");
+	AddToBinTree(b_tree, &nul, "h");
 	AddToBinTree(b_tree, &nul, "q");
 	AddToBinTree(b_tree, &nul, "k");
 	AddToBinTree(b_tree, &nul, "s");

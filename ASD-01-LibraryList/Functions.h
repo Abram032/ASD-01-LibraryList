@@ -44,14 +44,19 @@ void AddUntilNegativeBack(ListEl *list_el)
 
 void RemoveValue(ListEl *list_el, int x)
 {
+	//Sprawdzamy czy lista jest pusta.
 	if (ListEmpty(*list_el) == 0)
 	{
+		//Tworzymy wskazniki na obecny i poprzedni element struktury.
 		ListEl current_element = *list_el;
 		ListEl previous_element = *list_el;
+		//Sprawdzamy czy obecny element jest pusty.
 		while (current_element != NULL)
 		{
+			//Sprawdzamy czy wartosc elementu szukanego jest na obecnej pozycji
 			if (current_element->value == x)
 			{
+				//Warunek sprawdzajacy czy nasza wartoscia nie jest 1 element listy, kluczowe poniewaz trzeba przesunac glowe.
 				if (current_element == previous_element)
 				{
 					previous_element = current_element->next;
@@ -59,6 +64,8 @@ void RemoveValue(ListEl *list_el, int x)
 					free(current_element);
 					current_element = previous_element;
 				}
+				//Jesli nie to ustawiamy nastepny element poprzedniego jako obecny nastepny, usuwamy obecny element
+				//Przesuwamy nasz wskaznik na obecny element na element poprzedni
 				else
 				{
 					previous_element->next = current_element->next;
@@ -66,6 +73,7 @@ void RemoveValue(ListEl *list_el, int x)
 					current_element = previous_element;
 				}
 			}
+			//Jesli na obecnej pozycji nie ma naszej wartosci to przechodzimy dalej.
 			else
 			{
 				previous_element = current_element;
@@ -77,12 +85,16 @@ void RemoveValue(ListEl *list_el, int x)
 
 void RemoveValueRecursive(ListEl *list_el, int x)
 {
+	//Sprawdzamy czy lista jest pusta.
 	if (ListEmpty(*list_el) == 0)
 	{
+		//Tworzymy wskazniki na obecny i poprzedni element struktury.
 		ListEl previous_element = *list_el;
 		ListEl current_element = *list_el;
+		//Sprawdzamy czy wartosc elementu szukanego jest na obecnej pozycji
 		if (current_element->value == x)
 		{
+			//Warunek sprawdzajacy czy nasza wartoscia nie jest 1 element listy, kluczowe poniewaz trzeba przesunac glowe.
 			if (current_element == previous_element)
 			{
 				previous_element = current_element->next;
@@ -92,6 +104,7 @@ void RemoveValueRecursive(ListEl *list_el, int x)
 				RemoveValueRecursive(&(*list_el), x);
 			}
 		}
+		//Jesli na obecnej pozycji nie ma naszej wartosci to przechodzimy dalej.
 		else
 		{
 			RemoveValueRecursive(&(*list_el)->next, x);
@@ -156,6 +169,52 @@ void MostFrequentValue(ListEl *list_el)
 		printf("The most occuring value is %d. It appeared %d times in list.\n", value, count);
 	}
 }
+
+/*
+void GetMostFrequnet(lista l)
+{
+    if(l != 0)
+    {
+    lista w = 0, c = 0;
+    lista p = (lista)malloc(sizeof(elListy));
+    int found = 0, max = 0, value = 0;
+    while(l)
+    {
+        found = 0;
+        while(c)
+        {
+            if(c->klucz == l->klucz)
+            {
+                c->licznik++;
+                found = 1;
+            }
+            c = c->nast;
+        }
+        if(found == 0)
+        {
+            AddElement(&w, l->klucz);
+        }
+        l = l->nast;
+        c = w;
+    }
+    
+    while(w)
+    {
+        if(max < w->licznik)
+        {
+            max = w->licznik;
+            value = w->klucz;
+        }
+        w=w->nast;
+    }
+    
+        printf("Most frequent number in a list is: %d with %d repetitions!\n", value, max);
+    }
+    else
+        printf("List empty!\n");
+    system("pause");
+}
+*/
 
 void RemoveEven(ListEl *list_el)
 {

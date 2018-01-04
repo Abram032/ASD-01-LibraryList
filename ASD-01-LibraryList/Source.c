@@ -44,6 +44,7 @@ int main()
 	BinTree *b_tree = NULL;
 	BinTree *b_tree_a = NULL;
 	BinTree *b_tree_re = NULL;
+	BinTreeEl *nul = NULL;
 	char buffer[2048];
 
 	char operand;
@@ -469,7 +470,7 @@ int main()
 				case 1:
 					printf("Put data: ");
 					scanf("%s", buffer);
-					AddToBinTree(&b_tree, NULL, buffer);
+					AddToBinTree(&b_tree, &nul, buffer);
 					memset(buffer, 0, sizeof buffer);
 					system("pause");
 					break;
@@ -486,6 +487,7 @@ int main()
 					break;
 				case 4:
 					b_tree_re = MinTree(&b_tree);
+					printf("%s", b_tree_re->data);
 					system("pause");
 					break;
 				case 5:
