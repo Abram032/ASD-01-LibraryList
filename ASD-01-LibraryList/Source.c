@@ -15,6 +15,7 @@
 #include "ONP2.h"
 #include "TestInput_Tree.h"
 #include "Sort.h"
+#include "Graphs.h"
 
 /*
 	One way list with functions.
@@ -49,12 +50,14 @@ int main()
 
 	char operand;
 	int x, p, key;
+	int n, nl;
 	int loop = 1;
 	int ow_loop = 1;
 	int owc_loop = 1;
 	int tw_loop = 1;
 	int twc_loop = 1;
 	int prior_loop = 1;
+	int graph_loop = 1;
 	
 	int pd_loop = 1;
 
@@ -63,6 +66,11 @@ int main()
 	int sort_loop = 1;
 	int *A, *a, *b;
 	float *AF;
+
+	int ** M;
+	int ** MR;
+	List *ML = NULL;
+	List *MLR = NULL;
 
 	Input_Tree(&b_tree);
 	Input_Tree2(&b_tree_a);
@@ -625,6 +633,70 @@ int main()
 					break;
 				}
 			} while (sort_loop == 1);
+			system("pause");
+			break;
+		case 8:
+			graph_loop = 1;
+			do
+			{
+				system("cls");
+				MainMenuGraphs();
+				int graph_option = ChooseOption();
+				switch (graph_option)
+				{
+				case 1:
+					printf("Matrix size [n][n]: ");
+					scanf(" %d", &n);
+					M = LoadMatrixGraph(n);
+					system("pause");
+					break;
+				case 2:
+					printf("Amount of lists [n]->[l]: ");
+					scanf(" %d", &nl);
+					ML = LoadListGraph(nl);
+					system("pause");
+					break;
+				case 3:
+					ViewMatrix(M, n);
+					system("pause");
+					break;
+				case 4:
+					ViewMLists(ML, nl);
+					system("pause");
+					break;
+				case 10:
+					M = TransformL2M(ML, nl);
+					ViewMatrix(M, nl);
+					system("pause");
+					break;
+				case 11:
+					ViewMLists(ML, nl);
+					printf("\n");
+					M = TransformL2M(ML, nl);
+					//ViewMatrix(M, nl);
+					//printf("\n");
+					MR = ReverseMatrix(M, nl);
+					//ViewMatrix(MR, nl);
+					//printf("\n");
+					MLR = TransformM2L(MR, nl);
+					ViewMLists(MLR, nl);
+					system("pause");
+					break;
+				case 99:
+					graph_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					graph_loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.\n");
+					system("pause");
+					break;
+				}
+			} while (graph_loop == 1);
 			system("pause");
 			break;
 		case 90:

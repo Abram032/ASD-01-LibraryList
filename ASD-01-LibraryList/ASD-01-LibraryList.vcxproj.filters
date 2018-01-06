@@ -25,6 +25,9 @@
     <Filter Include="Header Files\Sorting">
       <UniqueIdentifier>{c27746f4-a109-405c-8796-1873c4f01f44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphs">
+      <UniqueIdentifier>{818474e1-af67-480a-a74b-c2e0ba36ee9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.c">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="Sort.h">
       <Filter>Header Files\Sorting</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphs.h">
+      <Filter>Header Files\Graphs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

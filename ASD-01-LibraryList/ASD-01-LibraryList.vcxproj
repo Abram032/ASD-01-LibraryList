@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Functions.h" />
+    <ClInclude Include="Graphs.h" />
     <ClInclude Include="ONP2.h" />
     <ClInclude Include="Sort.h" />
     <ClInclude Include="TestInput_Tree.h" />
