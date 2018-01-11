@@ -212,6 +212,7 @@ void MainMenuGraphs()
 	printf("10. Transform List Graph into Matrix Graph.\n");
 	printf("11. Reverse List Graph.\n");
 	printf("------------------------------------------------------\n");
+	printf("------------------------------------------------------\n");
 	printf("99. Go back to main menu.\n");
 	printf("0. Exit.\n");
 	printf("------------------------------------------------------\n");

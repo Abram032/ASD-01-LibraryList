@@ -161,7 +161,7 @@ int main()
 					system("pause");
 					break;
 				case 21:
-					FlipListRecursive(&list_el);
+					list_el = FlipListRecursive(list_el, 0);
 					system("pause");
 					break;
 				case 22:
