@@ -10,7 +10,7 @@ Assigment Checklist:
 2. DONE
 3. DONE (Optional)
 4. DONE (Optional)
-5. Recursive version left
+5. DONE
 6. DONE
 7. DONE (Optional)
 8. DONE (Optional)
