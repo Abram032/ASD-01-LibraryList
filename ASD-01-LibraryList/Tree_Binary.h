@@ -74,7 +74,7 @@ int CountLeaves(BinTreeEl *b_tree)
 		return CountLeaves(&(*b_tree)->right) + CountLeaves(&(*b_tree)->left);
 	}
 }
-//TODO: DO POPRAWY
+/*
 int MaxDepth(BinTreeEl b_tree)
 {
 	if (b_tree == NULL)
@@ -99,6 +99,8 @@ int MaxDepth(BinTreeEl b_tree)
 		return depth++;
 	}
 }
+*/
+//Do naprawienia:
 /*
 void MaxDepthInTree(BinTreeEl *b_tree)
 {
@@ -121,7 +123,7 @@ void MaxDepthInTree(BinTreeEl *b_tree)
 
 	while (current_element != NULL)
 	{
-		if (current_element->right != NULL && last < current_element->right->value)
+		if (current_element->right != NULL && last < current_element->right->data)
 		{
 			current_element = current_element->right;
 			depth++;
@@ -134,18 +136,18 @@ void MaxDepthInTree(BinTreeEl *b_tree)
 			{
 				max_depth = depth;
 			}
-			last = current_element->value;
+			last = current_element->data;
 		}
 		else
 		{
-			last = current_element->value;
+			last = current_element->data;
 			current_element = current_element->parent;
 			depth--;
 		}
 	}
 	printf("Max depth: %d\n", max_depth);
-}*/
-
+}
+*/
 BinTreeEl * SearchTree(BinTreeEl *b_tree, char *buffer)
 {
 	if (TreeEmpty(b_tree) == 1)
@@ -410,4 +412,18 @@ void CompareTrees(BinTreeEl b_tree, BinTreeEl b_tree_a)
 	}
 	printf("Data in trees is the same.\n");
 	return;
+}
+
+void TreeSymmetry(BinTreeEl a_tree, BinTreeEl b_tree)
+{
+	if (a_tree->data != b_tree)
+	{
+		printf("Tree does not have symmetry!");
+		return;
+	}
+	else
+	{
+		TreeSymmetry(a_tree->left, b_tree->right);
+		TreeSymmetry(a_tree->right, b_tree->left);
+	}
 }

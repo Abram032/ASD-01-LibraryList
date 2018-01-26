@@ -15,13 +15,8 @@
 #include "ONP2.h"
 #include "TestInput_Tree.h"
 #include "Sort.h"
-
-/*
-	One way list with functions.
-
-	TODO:
-	- ADD COMMENTS !!!
-*/
+#include "Graphs.h"
+#include "Paths.h"
 
 int main()
 {
@@ -44,17 +39,20 @@ int main()
 	BinTree *b_tree = NULL;
 	BinTree *b_tree_a = NULL;
 	BinTree *b_tree_re = NULL;
+	BinTreeEl *nul = NULL;
 	char buffer[2048];
 
 	char operand;
 	int x, p, key;
+	int n, nl;
 	int loop = 1;
 	int ow_loop = 1;
 	int owc_loop = 1;
 	int tw_loop = 1;
 	int twc_loop = 1;
 	int prior_loop = 1;
-	
+	int graph_loop = 1;
+	int path_loop = 1;
 	int pd_loop = 1;
 
 	int bintree_loop = 1;
@@ -62,6 +60,19 @@ int main()
 	int sort_loop = 1;
 	int *A, *a, *b;
 	float *AF;
+
+	int ** M;
+	int ** MR;
+	List *ML = NULL;
+	List *MLR = NULL;
+
+	//Paths
+	int *distance;
+	int *pathprev;
+	int source;
+	int target;
+
+	PriorList *Graph = NULL;
 
 	Input_Tree(&b_tree);
 	Input_Tree2(&b_tree_a);
@@ -152,7 +163,7 @@ int main()
 					system("pause");
 					break;
 				case 21:
-					FlipListRecursive(&list_el);
+					list_el = FlipListRecursive(list_el, 0);
 					system("pause");
 					break;
 				case 22:
@@ -469,7 +480,7 @@ int main()
 				case 1:
 					printf("Put data: ");
 					scanf("%s", buffer);
-					AddToBinTree(&b_tree, NULL, buffer);
+					AddToBinTree(&b_tree, &nul, buffer);
 					memset(buffer, 0, sizeof buffer);
 					system("pause");
 					break;
@@ -486,6 +497,7 @@ int main()
 					break;
 				case 4:
 					b_tree_re = MinTree(&b_tree);
+					printf("%s", b_tree_re->data);
 					system("pause");
 					break;
 				case 5:
@@ -500,8 +512,8 @@ int main()
 					system("pause");
 					break;
 				case 7:
-					x = MaxDepth(b_tree);
-					printf("Max depth in tree: %d\n", x);
+					MaxDepthInTree(b_tree);
+					//printf("Max depth in tree: %d\n", x);
 					system("pause");
 					break;
 				case 8:
@@ -623,6 +635,119 @@ int main()
 					break;
 				}
 			} while (sort_loop == 1);
+			system("pause");
+			break;
+		case 8:
+			graph_loop = 1;
+			do
+			{
+				system("cls");
+				MainMenuGraphs();
+				int graph_option = ChooseOption();
+				switch (graph_option)
+				{
+				case 1:
+					printf("Matrix size [n][n]: ");
+					scanf(" %d", &n);
+					M = LoadMatrixGraph(n);
+					system("pause");
+					break;
+				case 2:
+					printf("Amount of lists [n]->[l]: ");
+					scanf(" %d", &nl);
+					ML = LoadListGraph(nl);
+					system("pause");
+					break;
+				case 3:
+					ViewMatrix(M, n);
+					system("pause");
+					break;
+				case 4:
+					ViewMLists(ML, nl);
+					system("pause");
+					break;
+				case 10:
+					M = TransformL2M(ML, nl);
+					ViewMatrix(M, nl);
+					system("pause");
+					break;
+				case 11:
+					ViewMLists(ML, nl);
+					printf("\n");
+					M = TransformL2M(ML, nl);
+					//ViewMatrix(M, nl);
+					//printf("\n");
+					MR = ReverseMatrix(M, nl);
+					//ViewMatrix(MR, nl);
+					//printf("\n");
+					MLR = TransformM2L(MR, nl);
+					ViewMLists(MLR, nl);
+					system("pause");
+					break;
+				case 99:
+					graph_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					graph_loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.\n");
+					system("pause");
+					break;
+				}
+			} while (graph_loop == 1);
+			system("pause");
+			break;
+		case 9:
+			path_loop = 1;
+			do 
+			{
+				system("cls");
+				MainMenuPaths();
+				int path_option = ChooseOption();
+				switch (path_option)
+				{
+				case 1:
+					printf("Amount of lists [n]->[l]: ");
+					scanf(" %d", &nl);
+					Graph = LoadPriorListGraph(nl);
+					system("pause");
+					break;
+				case 2:
+					ViewPriorLists(Graph, nl);
+					system("pause");
+					break;
+				case 10:
+					printf("Source vertex: ");
+					scanf(" %d", &source);
+					printf("Target vertex: ");
+					scanf(" %d", &target);
+					Dijkstra(Graph, nl, source, target);
+					system("pause");
+					break;
+				case 20:
+					Graph = Init_Test_Graph();
+					nl = 5;
+					system("pause");
+					break;
+				case 99:
+					path_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					path_loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.\n");
+					system("pause");
+					break;
+				}
+			} while (path_loop == 1);
 			system("pause");
 			break;
 		case 90:

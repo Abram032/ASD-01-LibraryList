@@ -157,6 +157,52 @@ void MostFrequentValue(ListEl *list_el)
 	}
 }
 
+/*
+void GetMostFrequnet(lista l)
+{
+    if(l != 0)
+    {
+    lista w = 0, c = 0;
+    lista p = (lista)malloc(sizeof(elListy));
+    int found = 0, max = 0, value = 0;
+    while(l)
+    {
+        found = 0;
+        while(c)
+        {
+            if(c->klucz == l->klucz)
+            {
+                c->licznik++;
+                found = 1;
+            }
+            c = c->nast;
+        }
+        if(found == 0)
+        {
+            AddElement(&w, l->klucz);
+        }
+        l = l->nast;
+        c = w;
+    }
+    
+    while(w)
+    {
+        if(max < w->licznik)
+        {
+            max = w->licznik;
+            value = w->klucz;
+        }
+        w=w->nast;
+    }
+    
+        printf("Most frequent number in a list is: %d with %d repetitions!\n", value, max);
+    }
+    else
+        printf("List empty!\n");
+    system("pause");
+}
+*/
+
 void RemoveEven(ListEl *list_el)
 {
 	if (ListEmpty(*list_el) == 0)

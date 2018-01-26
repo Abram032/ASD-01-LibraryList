@@ -200,9 +200,18 @@ void FlipList(ListEl *list_el)
 	}
 }
 
-void FlipListRecursive(ListEl *list_el)
+ListEl FlipListRecursive(ListEl list_el, ListEl prop)
 {
-	/*
-		- TODO
-	*/
+	if (list_el != NULL)
+	{
+		if (list_el->next == NULL)
+		{
+			list_el->next = prop;
+			return list_el;
+		}
+		ListEl tail = list_el->next;
+		list_el->next = prop;
+		return FlipListRecursive(tail, list_el);
+	}
+	return 0;
 }

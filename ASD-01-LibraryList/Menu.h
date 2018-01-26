@@ -17,6 +17,9 @@ void MainMenu()
 	printf("------------------------------------------------------\n");
 	printf("7. Sorting\n");
 	printf("------------------------------------------------------\n");
+	printf("8. Graphs\n");
+	printf("9. Paths\n");
+	printf("------------------------------------------------------\n");
 	printf("90. PD.\n");
 	printf("------------------------------------------------------\n");
 	printf("0. Exit.\n");
@@ -191,6 +194,42 @@ void MainMenuSorting()
 	printf("6. Run All.\n");
 	printf("------------------------------------------------------\n");
 	printf("10. Heap Sort.\n");
+	printf("------------------------------------------------------\n");
+	printf("99. Go back to main menu.\n");
+	printf("0. Exit.\n");
+	printf("------------------------------------------------------\n");
+}
+
+void MainMenuGraphs()
+{
+	printf("------------------------------------------------------\n");
+	printf("----------------------/ASD Lists/---------------------\n");
+	printf("------------------------------------------------------\n");
+	printf("1. Generate Graph [Matrix].\n");
+	printf("2. Generate Graph [Lists].\n");
+	printf("3. View Graph [Matrix].\n");
+	printf("4. View Graph [Lists].\n");
+	printf("------------------------------------------------------\n");
+	printf("10. Transform List Graph into Matrix Graph.\n");
+	printf("11. Reverse List Graph.\n");
+	printf("------------------------------------------------------\n");
+	printf("99. Go back to main menu.\n");
+	printf("0. Exit.\n");
+	printf("------------------------------------------------------\n");
+}
+
+void MainMenuPaths()
+{
+	printf("------------------------------------------------------\n");
+	printf("----------------------/ASD Lists/---------------------\n");
+	printf("------------------------------------------------------\n");
+	printf("1. Generate Graph.\n");
+	printf("2. View Graph [Lists].\n");
+	//printf("3. View Graph [Matrix].\n");
+	printf("------------------------------------------------------\n");
+	printf("10. Find Shortest Path [a->b].\n");
+	printf("------------------------------------------------------\n");
+	printf("20. Initiate test graph.\n");
 	printf("------------------------------------------------------\n");
 	printf("99. Go back to main menu.\n");
 	printf("0. Exit.\n");

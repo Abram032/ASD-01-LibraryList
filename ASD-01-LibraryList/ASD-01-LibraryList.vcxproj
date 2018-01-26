@@ -139,11 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="README.c" />
     <ClCompile Include="Source.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Functions.h" />
+    <ClInclude Include="Graphs.h" />
     <ClInclude Include="ONP2.h" />
+    <ClInclude Include="Paths.h" />
     <ClInclude Include="Sort.h" />
     <ClInclude Include="TestInput_Tree.h" />
     <ClInclude Include="Lists.h" />
