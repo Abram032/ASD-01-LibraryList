@@ -16,13 +16,7 @@
 #include "TestInput_Tree.h"
 #include "Sort.h"
 #include "Graphs.h"
-
-/*
-	One way list with functions.
-
-	TODO:
-	- ADD COMMENTS !!!
-*/
+#include "Paths.h"
 
 int main()
 {
@@ -58,7 +52,7 @@ int main()
 	int twc_loop = 1;
 	int prior_loop = 1;
 	int graph_loop = 1;
-	
+	int path_loop = 1;
 	int pd_loop = 1;
 
 	int bintree_loop = 1;
@@ -71,6 +65,14 @@ int main()
 	int ** MR;
 	List *ML = NULL;
 	List *MLR = NULL;
+
+	//Paths
+	int *distance;
+	int *pathprev;
+	int source;
+	int target;
+
+	PriorList *Graph = NULL;
 
 	Input_Tree(&b_tree);
 	Input_Tree2(&b_tree_a);
@@ -510,8 +512,8 @@ int main()
 					system("pause");
 					break;
 				case 7:
-					x = MaxDepth(b_tree);
-					printf("Max depth in tree: %d\n", x);
+					MaxDepthInTree(b_tree);
+					//printf("Max depth in tree: %d\n", x);
 					system("pause");
 					break;
 				case 8:
@@ -697,6 +699,55 @@ int main()
 					break;
 				}
 			} while (graph_loop == 1);
+			system("pause");
+			break;
+		case 9:
+			path_loop = 1;
+			do 
+			{
+				system("cls");
+				MainMenuPaths();
+				int path_option = ChooseOption();
+				switch (path_option)
+				{
+				case 1:
+					printf("Amount of lists [n]->[l]: ");
+					scanf(" %d", &nl);
+					Graph = LoadPriorListGraph(nl);
+					system("pause");
+					break;
+				case 2:
+					ViewPriorLists(Graph, nl);
+					system("pause");
+					break;
+				case 10:
+					printf("Source vertex: ");
+					scanf(" %d", &source);
+					printf("Target vertex: ");
+					scanf(" %d", &target);
+					Dijkstra(Graph, nl, source, target);
+					system("pause");
+					break;
+				case 20:
+					Graph = Init_Test_Graph();
+					nl = 5;
+					system("pause");
+					break;
+				case 99:
+					path_loop = 0;
+					system("pause");
+					break;
+				case 0:
+					loop = 0;
+					path_loop = 0;
+					system("pause");
+					break;
+				default:
+					printf("\nUnknown option.\n");
+					system("pause");
+					break;
+				}
+			} while (path_loop == 1);
 			system("pause");
 			break;
 		case 90:

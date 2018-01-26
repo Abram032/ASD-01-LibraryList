@@ -33,6 +33,9 @@
     <ClCompile Include="Source.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="README.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestInput.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files\Sorting</Filter>
     </ClInclude>
     <ClInclude Include="Graphs.h">
+      <Filter>Header Files\Graphs</Filter>
+    </ClInclude>
+    <ClInclude Include="Paths.h">
       <Filter>Header Files\Graphs</Filter>
     </ClInclude>
   </ItemGroup>

@@ -44,19 +44,14 @@ void AddUntilNegativeBack(ListEl *list_el)
 
 void RemoveValue(ListEl *list_el, int x)
 {
-	//Sprawdzamy czy lista jest pusta.
 	if (ListEmpty(*list_el) == 0)
 	{
-		//Tworzymy wskazniki na obecny i poprzedni element struktury.
 		ListEl current_element = *list_el;
 		ListEl previous_element = *list_el;
-		//Sprawdzamy czy obecny element jest pusty.
 		while (current_element != NULL)
 		{
-			//Sprawdzamy czy wartosc elementu szukanego jest na obecnej pozycji
 			if (current_element->value == x)
 			{
-				//Warunek sprawdzajacy czy nasza wartoscia nie jest 1 element listy, kluczowe poniewaz trzeba przesunac glowe.
 				if (current_element == previous_element)
 				{
 					previous_element = current_element->next;
@@ -64,8 +59,6 @@ void RemoveValue(ListEl *list_el, int x)
 					free(current_element);
 					current_element = previous_element;
 				}
-				//Jesli nie to ustawiamy nastepny element poprzedniego jako obecny nastepny, usuwamy obecny element
-				//Przesuwamy nasz wskaznik na obecny element na element poprzedni
 				else
 				{
 					previous_element->next = current_element->next;
@@ -73,7 +66,6 @@ void RemoveValue(ListEl *list_el, int x)
 					current_element = previous_element;
 				}
 			}
-			//Jesli na obecnej pozycji nie ma naszej wartosci to przechodzimy dalej.
 			else
 			{
 				previous_element = current_element;
@@ -85,16 +77,12 @@ void RemoveValue(ListEl *list_el, int x)
 
 void RemoveValueRecursive(ListEl *list_el, int x)
 {
-	//Sprawdzamy czy lista jest pusta.
 	if (ListEmpty(*list_el) == 0)
 	{
-		//Tworzymy wskazniki na obecny i poprzedni element struktury.
 		ListEl previous_element = *list_el;
 		ListEl current_element = *list_el;
-		//Sprawdzamy czy wartosc elementu szukanego jest na obecnej pozycji
 		if (current_element->value == x)
 		{
-			//Warunek sprawdzajacy czy nasza wartoscia nie jest 1 element listy, kluczowe poniewaz trzeba przesunac glowe.
 			if (current_element == previous_element)
 			{
 				previous_element = current_element->next;
@@ -104,7 +92,6 @@ void RemoveValueRecursive(ListEl *list_el, int x)
 				RemoveValueRecursive(&(*list_el), x);
 			}
 		}
-		//Jesli na obecnej pozycji nie ma naszej wartosci to przechodzimy dalej.
 		else
 		{
 			RemoveValueRecursive(&(*list_el)->next, x);

@@ -22,7 +22,7 @@ int PriorListEmpty(PriorListEl *prior_list_el)
 	}
 	else
 	{
-		printf("List is empty!\n");
+		//printf("List is empty!\n");
 		return 1;
 	}
 }
